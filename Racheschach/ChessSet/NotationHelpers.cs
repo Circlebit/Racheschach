@@ -38,5 +38,38 @@ namespace Racheschach.ChessSet
             else throw new Exception();
         }
 
+        public static Char GetUniCodeForPiece(Color color, PieceType pieceType)
+        {
+            switch (color)
+            {
+                case Color.White:
+                    switch (pieceType)
+                    {
+                        case PieceType.None: return '\0';
+                        case PieceType.King: return '♔';
+                        case PieceType.Queen: return '♕';
+                        case PieceType.Rook: return '♖';
+                        case PieceType.Bishop: return '♗';
+                        case PieceType.Knight: return '♘';
+                        case PieceType.Pawn: return '♙';
+                        default: throw new Exception();
+                    }
+                case Color.Black:
+                    switch (pieceType)
+                    {
+                        case PieceType.None: return '\0';
+                        case PieceType.King: return '♚';
+                        case PieceType.Queen: return '♛';
+                        case PieceType.Rook: return '♜';
+                        case PieceType.Bishop: return '♝';
+                        case PieceType.Knight: return '♞';
+                        case PieceType.Pawn: return '♟';
+                        default: throw new Exception();
+                    }
+                case Color.None: return '\0';
+                default: throw new Exception();
+            }
+        }
+
     }
 }

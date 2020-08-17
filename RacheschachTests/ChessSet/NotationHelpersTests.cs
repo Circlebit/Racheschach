@@ -109,5 +109,33 @@ namespace Racheschach.ChessSet.Tests
             act = () => NotationHelpers.ArrayIndexBySquareNotation("2b");
             Assert.Throws<Exception>(act);
         }
+
+        [Fact()]
+        public void GetUniCodeForPieceTest()
+        {
+            Assert.Equal('♔', NotationHelpers.GetUniCodeForPiece(Color.White, PieceType.King));
+            Assert.Equal('♕', NotationHelpers.GetUniCodeForPiece(Color.White, PieceType.Queen));
+            Assert.Equal('♖', NotationHelpers.GetUniCodeForPiece(Color.White, PieceType.Rook));
+            Assert.Equal('♗', NotationHelpers.GetUniCodeForPiece(Color.White, PieceType.Bishop));
+            Assert.Equal('♘', NotationHelpers.GetUniCodeForPiece(Color.White, PieceType.Knight));
+            Assert.Equal('♙', NotationHelpers.GetUniCodeForPiece(Color.White, PieceType.Pawn));
+
+            Assert.Equal('♚', NotationHelpers.GetUniCodeForPiece(Color.Black, PieceType.King));
+            Assert.Equal('♛', NotationHelpers.GetUniCodeForPiece(Color.Black, PieceType.Queen));
+            Assert.Equal('♜', NotationHelpers.GetUniCodeForPiece(Color.Black, PieceType.Rook));
+            Assert.Equal('♝', NotationHelpers.GetUniCodeForPiece(Color.Black, PieceType.Bishop));
+            Assert.Equal('♞', NotationHelpers.GetUniCodeForPiece(Color.Black, PieceType.Knight));
+            Assert.Equal('♟', NotationHelpers.GetUniCodeForPiece(Color.Black, PieceType.Pawn));
+
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.None, PieceType.None));
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.White, PieceType.None));
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.Black, PieceType.None));
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.None, PieceType.King));
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.None, PieceType.Queen));
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.None, PieceType.Rook));
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.None, PieceType.Bishop));
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.None, PieceType.Knight));
+            Assert.Equal('\0', NotationHelpers.GetUniCodeForPiece(Color.None, PieceType.Pawn));
+        }
     }
 }
