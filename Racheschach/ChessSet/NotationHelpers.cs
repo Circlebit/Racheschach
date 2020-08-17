@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Racheschach.ChessSet
 {
@@ -13,5 +12,31 @@ namespace Racheschach.ChessSet
             else
                 throw new ArgumentOutOfRangeException();
         }
+
+        public static (int x, int y) ArrayIndexBySquareNotation(string notation)
+        {
+            notation = notation.ToLower().Trim();
+
+            if (notation.Length != 2 || !notation.All(Char.IsLetterOrDigit))
+                throw new Exception();
+
+            var foox = notation[0];
+            var foo = notation[0]-97;
+
+            var barx = notation[1];
+            var bar = Convert.ToInt32(Char.GetNumericValue(notation[1])) - 1;
+
+            bool b = foo >= 'a';
+
+            if (notation[0] >= 'a'
+             && notation[0] <= 'h'
+             && notation[1] >= '0'
+             && notation[1] <= '8')
+            {
+                return ((Convert.ToInt32(notation[0])-97), Convert.ToInt32(Char.GetNumericValue(notation[1]))-1);
+            }
+            else throw new Exception();
+        }
+
     }
 }

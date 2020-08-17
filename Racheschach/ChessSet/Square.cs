@@ -6,8 +6,9 @@ namespace Racheschach.ChessSet
 {
     public class Square
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public int X { get; }
+        public int Y { get; }
+        public Piece Piece { get; }
 
         public string Notation => NotationHelpers.SquareNotationByArrayIndex(X, Y);
 
@@ -15,6 +16,7 @@ namespace Racheschach.ChessSet
         {
             X = x;
             Y = y;
+            Piece = new Piece(Color.None, PieceType.None);
         }
 
 

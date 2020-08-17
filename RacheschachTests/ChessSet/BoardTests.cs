@@ -42,7 +42,6 @@ namespace Racheschach.ChessSet.Tests
 
         }
 
-
         [Fact()]
         public void BoardSquaresNotNullTest()
         {
@@ -60,5 +59,92 @@ namespace Racheschach.ChessSet.Tests
             }
         }
 
+        [Fact()]
+        public void SetupGameTest_WhitePawns()
+        {
+            Board b = new Board();
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("a2").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("b2").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("c2").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("d2").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("e2").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("f2").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("g2").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("h2").Piece.PieceType);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("a2").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("b2").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("c2").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("d2").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("e2").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("f2").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("g2").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("h2").Piece.Color);
+        }
+
+        [Fact()]
+        public void SetupGameTest_WhitePieces()
+        {
+            Board b = new Board();
+            Assert.Equal(PieceType.Rook, b.GetSquareBySquareNotation("a1").Piece.PieceType);
+            Assert.Equal(PieceType.Knight, b.GetSquareBySquareNotation("b1").Piece.PieceType);
+            Assert.Equal(PieceType.Bishop, b.GetSquareBySquareNotation("c1").Piece.PieceType);
+            Assert.Equal(PieceType.Queen, b.GetSquareBySquareNotation("d1").Piece.PieceType);
+            Assert.Equal(PieceType.King, b.GetSquareBySquareNotation("e1").Piece.PieceType);
+            Assert.Equal(PieceType.Bishop, b.GetSquareBySquareNotation("f1").Piece.PieceType);
+            Assert.Equal(PieceType.Knight, b.GetSquareBySquareNotation("g1").Piece.PieceType);
+            Assert.Equal(PieceType.Rook, b.GetSquareBySquareNotation("h1").Piece.PieceType);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("a1").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("b1").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("c1").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("d1").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("e1").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("f1").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("g1").Piece.Color);
+            Assert.Equal(Color.White, b.GetSquareBySquareNotation("h1").Piece.Color);
+        }
+
+        [Fact()]
+        public void SetupGameTest_BlackPawns()
+        {
+            Board b = new Board();
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("a7").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("b7").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("c7").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("d7").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("e7").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("f7").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("g7").Piece.PieceType);
+            Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("h7").Piece.PieceType);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("a7").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("b7").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("c7").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("d7").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("e7").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("f7").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("g7").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("h7").Piece.Color);
+        }
+
+        [Fact()]
+        public void SetupGameTest_BlackPieces()
+        {
+            Board b = new Board();
+            Assert.Equal(PieceType.Rook, b.GetSquareBySquareNotation("a8").Piece.PieceType);
+            Assert.Equal(PieceType.Knight, b.GetSquareBySquareNotation("b8").Piece.PieceType);
+            Assert.Equal(PieceType.Bishop, b.GetSquareBySquareNotation("c8").Piece.PieceType);
+            Assert.Equal(PieceType.Queen, b.GetSquareBySquareNotation("d8").Piece.PieceType);
+            Assert.Equal(PieceType.King, b.GetSquareBySquareNotation("e8").Piece.PieceType);
+            Assert.Equal(PieceType.Bishop, b.GetSquareBySquareNotation("f8").Piece.PieceType);
+            Assert.Equal(PieceType.Knight, b.GetSquareBySquareNotation("g8").Piece.PieceType);
+            Assert.Equal(PieceType.Rook, b.GetSquareBySquareNotation("h8").Piece.PieceType);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("a8").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("b8").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("c8").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("d8").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("e8").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("f8").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("g8").Piece.Color);
+            Assert.Equal(Color.Black, b.GetSquareBySquareNotation("h8").Piece.Color);
+        }
     }
 }

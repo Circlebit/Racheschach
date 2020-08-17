@@ -43,7 +43,7 @@ namespace Racheschach.ChessSet.Tests
         public void SquareNotationByArrayIndexInvalidValuesTest()
         {
             Action act;
-                
+
             act = () => NotationHelpers.SquareNotationByArrayIndex(-1, 0);
             Assert.Throws<ArgumentOutOfRangeException>(act);
 
@@ -55,6 +55,59 @@ namespace Racheschach.ChessSet.Tests
 
             act = () => NotationHelpers.SquareNotationByArrayIndex(0, 8);
             Assert.Throws<ArgumentOutOfRangeException>(act);
+        }
+
+
+        [Fact()]
+        public void ArrayIndexBySquareNotationTest()
+        {
+            Assert.Equal((0, 0), NotationHelpers.ArrayIndexBySquareNotation("A1"));
+            Assert.Equal((1, 0), NotationHelpers.ArrayIndexBySquareNotation("B1"));
+            Assert.Equal((2, 0), NotationHelpers.ArrayIndexBySquareNotation(" C1"));
+            Assert.Equal((3, 0), NotationHelpers.ArrayIndexBySquareNotation("D1 "));
+            Assert.Equal((4, 0), NotationHelpers.ArrayIndexBySquareNotation("e1"));
+            Assert.Equal((5, 0), NotationHelpers.ArrayIndexBySquareNotation("f1"));
+            Assert.Equal((6, 0), NotationHelpers.ArrayIndexBySquareNotation("g1 "));
+            Assert.Equal((7, 0), NotationHelpers.ArrayIndexBySquareNotation(" h1"));
+
+            Assert.Equal((0, 1), NotationHelpers.ArrayIndexBySquareNotation("a2"));
+            Assert.Equal((1, 1), NotationHelpers.ArrayIndexBySquareNotation("b2"));
+            Assert.Equal((2, 1), NotationHelpers.ArrayIndexBySquareNotation("c2"));
+            Assert.Equal((3, 1), NotationHelpers.ArrayIndexBySquareNotation("d2"));
+            Assert.Equal((4, 1), NotationHelpers.ArrayIndexBySquareNotation("E2"));
+            Assert.Equal((5, 1), NotationHelpers.ArrayIndexBySquareNotation("F2"));
+            Assert.Equal((6, 1), NotationHelpers.ArrayIndexBySquareNotation("G2"));
+            Assert.Equal((7, 1), NotationHelpers.ArrayIndexBySquareNotation("H2"));
+
+            Assert.Equal((0, 7), NotationHelpers.ArrayIndexBySquareNotation("a8"));
+            Assert.Equal((1, 7), NotationHelpers.ArrayIndexBySquareNotation("b8"));
+            Assert.Equal((2, 7), NotationHelpers.ArrayIndexBySquareNotation("c8"));
+            Assert.Equal((3, 7), NotationHelpers.ArrayIndexBySquareNotation("d8"));
+            Assert.Equal((4, 7), NotationHelpers.ArrayIndexBySquareNotation("e8"));
+            Assert.Equal((5, 7), NotationHelpers.ArrayIndexBySquareNotation("f8"));
+            Assert.Equal((6, 7), NotationHelpers.ArrayIndexBySquareNotation("g8"));
+            Assert.Equal((7, 7), NotationHelpers.ArrayIndexBySquareNotation("h8"));
+        }
+
+        [Fact()]
+        public void ArrayIndexBySquareNotationInvalidValuesTest()
+        {
+            Action act;
+
+            act = () => NotationHelpers.ArrayIndexBySquareNotation("i1");
+            Assert.Throws<Exception>(act);
+
+            act = () => NotationHelpers.ArrayIndexBySquareNotation("a12");
+            Assert.Throws<Exception>(act);
+
+            act = () => NotationHelpers.ArrayIndexBySquareNotation("x3");
+            Assert.Throws<Exception>(act);
+
+            act = () => NotationHelpers.ArrayIndexBySquareNotation("♞1");
+            Assert.Throws<Exception>(act);
+
+            act = () => NotationHelpers.ArrayIndexBySquareNotation("2b");
+            Assert.Throws<Exception>(act);
         }
     }
 }

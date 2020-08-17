@@ -4,8 +4,15 @@ using System.Text;
 
 namespace Racheschach.ChessSet
 {
-    public abstract class Piece
+    public class Piece
     {
-    }
+        public Color Color { get; set; }
+        public PieceType PieceType { get; set; }
 
+        public Piece(Color color, PieceType pieceType)
+        {
+            Color = color;
+            PieceType = pieceType;
+        }
+    }
 }
