@@ -146,5 +146,7 @@ namespace Racheschach.ChessSet.Tests
             Assert.Equal(Color.Black, b.GetSquareBySquareNotation("g8").Piece.Color);
             Assert.Equal(Color.Black, b.GetSquareBySquareNotation("h8").Piece.Color);
         }
+
+
     }
 }

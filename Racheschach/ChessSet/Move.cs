@@ -9,5 +9,11 @@ namespace Racheschach.ChessSet
         public Square From { get; set; }
         public Square To { get; set; }
         public Piece Piece { get; set; }
+        public bool TakesPiece => To.IsEnemyPiece(From.Piece.Color);
+
+        public Move(Square from, Square to)
+        {
+
+        }
     }
 }

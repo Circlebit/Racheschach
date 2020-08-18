@@ -45,7 +45,7 @@ namespace Racheschach.ChessSet
                 case Color.White:
                     switch (pieceType)
                     {
-                        case PieceType.None: return '\0';
+                        case PieceType.None: return ' ';
                         case PieceType.King: return '♔';
                         case PieceType.Queen: return '♕';
                         case PieceType.Rook: return '♖';
@@ -57,7 +57,7 @@ namespace Racheschach.ChessSet
                 case Color.Black:
                     switch (pieceType)
                     {
-                        case PieceType.None: return '\0';
+                        case PieceType.None: return ' ';
                         case PieceType.King: return '♚';
                         case PieceType.Queen: return '♛';
                         case PieceType.Rook: return '♜';
@@ -66,7 +66,7 @@ namespace Racheschach.ChessSet
                         case PieceType.Pawn: return '♟';
                         default: throw new Exception();
                     }
-                case Color.None: return '\0';
+                case Color.None: return ' ';
                 default: throw new Exception();
             }
         }
