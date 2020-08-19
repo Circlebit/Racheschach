@@ -58,8 +58,9 @@ namespace Racheschach.ChessSet
 
         public static string BoardToFEN(Board board)
         {
-            var foo = new FEN();
-            return "";
+            var foo = new FEN(board);
+            throw new NotImplementedException();
+            //return "";
         }
     }
 }

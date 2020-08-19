@@ -7,11 +7,26 @@ namespace Racheschach.ChessSet
 {
     public class Piece
     {
+        private PieceType pieceType;
+
+        /// <summary>
+        /// The piece on the square. Whenever it is set to None Color ist also set to None.
+        /// </summary>
+        public PieceType PieceType
+        {
+            get => pieceType;
+            set
+            {
+                pieceType = value;
+                if (pieceType == PieceType.None) this.Color = Color.None;
+            }
+        }
         public Color Color { get; set; }
         public Color EnemyColor => GameHelpers.GetOppositeColor(Color);
 
-        public PieceType PieceType { get; set; }
         public Char UniCode => NotationHelpers.GetUniCodeForPiece(Color, PieceType);
+        public Char FEN => NotationHelpers.GetFENForPiece(Color, PieceType);
+
         public Square Square { get; set; }
 
         public Piece(Color color, PieceType pieceType, Square square)
@@ -43,7 +58,7 @@ namespace Racheschach.ChessSet
 
             //Moves towards North
             nextSquare = this.Square.NorthNeighbor;
-            while(nextSquare != null)
+            while (nextSquare != null)
             {
                 // friendly piece on nextSquare -> can't go there
                 if (nextSquare.IsFriendlyPiece(this.Color)) break;

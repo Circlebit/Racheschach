@@ -8,7 +8,30 @@ namespace Racheschach.ChessSet
     public class Board
     {
         public Square[,] Squares { get; set; }
-        public List<Move> Moves { get; set; }
+        public Stack<Move> Moves { get; set; }
+
+        public Color ActiveColor => GetActiveColor();
+
+        //TODO: get => from movestack?
+        public bool WhiteCanCastleKingside { get; set; } = true;
+        public bool WhiteCanCastleQueenside { get; set; } = true;
+        public bool BlackCanCastleKingside { get; set; } = true;
+        public bool BlackCanCastleQueenside { get; set; } = true;
+
+        /// <summary>
+        /// is null or a possible en Passant field (in the last draw an enemy pawn went two steps from starting position)
+        /// </summary>
+        public Square EnPassant { get; set; } //TODO: get => from movestack?
+
+        /// <summary>
+        /// Number of moves without movement of any pawn and without any capture (needed for 50-move rule)
+        /// </summary>
+        public int Halfmoves { get; set; } //TODO: get => from movestack?
+
+        /// <summary>
+        /// Number of moves. Incremented after every black move
+        /// </summary>
+        public int Fullmoves => (Moves.Count / 2) + 1;
 
         public Square[][] Rows => GetRows();
         public Square[][] Columns => GetColumns();
@@ -29,7 +52,14 @@ namespace Racheschach.ChessSet
             SetNeighborSquares();
 
             SetupGame();
+
         }
+
+        public void PlayMove()
+        {
+
+        }
+        //  "K" (White can castle kingside), "Q" (White can castle queenside), "k" (Black can castle kingside), and/or "q" (Black can castle queenside)
 
         public Square[] GetRowByIndex(int i)
         {
@@ -82,13 +112,19 @@ namespace Racheschach.ChessSet
             return rows;
         }
 
+        private Color GetActiveColor()
+        {
+            if (Moves.Count == 0) return Color.White;
+            else return GameHelpers.GetOppositeColor(Moves.Peek().Color);
+        }
+
         public void SetupGame()
         {
             SetupPawns(Color.White);
             SetupPawns(Color.Black);
             SetupPieces(Color.White);
             SetupPieces(Color.Black);
-            Moves = new List<Move>();
+            Moves = new Stack<Move>();
         }
 
         private void SetupPawns(Color color)
