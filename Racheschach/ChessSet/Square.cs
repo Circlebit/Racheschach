@@ -23,7 +23,7 @@ namespace Racheschach.ChessSet
 
         public bool IsFree => Piece.PieceType == PieceType.None;
         public List<Square> ThreateningSquares => GetThreateningSquares();
-        public string Notation => NotationHelpers.SquareNotationByArrayIndex(X, Y);
+        public string Notation => BoardHelpers.SquareNotationByArrayIndex(X, Y);
 
         public Square(int x, int y, Board board)
         {

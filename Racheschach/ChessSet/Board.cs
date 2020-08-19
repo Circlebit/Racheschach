@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Racheschach.Notation;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -51,7 +52,7 @@ namespace Racheschach.ChessSet
 
         public Square GetSquareBySquareNotation(string notation)
         {
-            var coords = NotationHelpers.ArrayIndexBySquareNotation(notation);
+            var coords = BoardHelpers.ArrayIndexBySquareNotation(notation);
             return Squares[coords.x, coords.y];
         }
 
