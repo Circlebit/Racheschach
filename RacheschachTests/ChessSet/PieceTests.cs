@@ -11,6 +11,9 @@ namespace Racheschach.ChessSet.Tests
         [Fact()]
         public void GetPossibleRookMovesTest()
         {
+            var b = new Board();
+
+
             Assert.True(false, "This test needs an implementation");
         }
     }
