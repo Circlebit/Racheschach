@@ -10,6 +10,10 @@ namespace Racheschach.ChessSet
         public Square[,] Squares { get; set; }
         public List<Move> Moves { get; set; }
 
+        public Square[][] Rows => GetRows();
+        public Square[][] Columns => GetColumns();
+
+
         public Board()
         {
             Squares = new Square[8, 8];
@@ -29,24 +33,22 @@ namespace Racheschach.ChessSet
 
         public Square[] GetRowByIndex(int i)
         {
-            return new Square[] { Squares[i, 0], Squares[i, 1], Squares[i, 2], Squares[i, 3], Squares[i, 4], Squares[i, 5], Squares[i, 6], Squares[i, 7] };
+            return new Square[] { Squares[0, i], Squares[1, i], Squares[2, i], Squares[3, i], Squares[4, i], Squares[5, i], Squares[6, i], Squares[7, i] };
         }
 
         public Square[] GetColumnByIndex(int i)
         {
-            return new Square[] { Squares[0, i], Squares[1, i], Squares[2, i], Squares[3, i], Squares[4, i], Squares[5, i], Squares[6, i], Squares[7, i] };
+            return new Square[] { Squares[i, 0], Squares[i, 1], Squares[i, 2], Squares[i, 3], Squares[i, 4], Squares[i, 5], Squares[i, 6], Squares[i, 7] };
         }
 
         public Square[] GetRowOrColumn(char name)
         {
             if (NotationHelpers.IsValidRowName(name))
-            {
-                throw new ArgumentOutOfRangeException();
-            }
+                return GetRowByIndex(BoardHelpers.RowNameToIndex(name));
+
             else if (NotationHelpers.IsValidColumnName(name))
-            {
-                throw new ArgumentOutOfRangeException();
-            }
+                return GetColumnByIndex(BoardHelpers.ColumnNameToIndex(name));
+
             else throw new ArgumentOutOfRangeException();
         }
 
@@ -54,6 +56,30 @@ namespace Racheschach.ChessSet
         {
             var coords = BoardHelpers.ArrayIndexBySquareNotation(notation);
             return Squares[coords.x, coords.y];
+        }
+
+        private Square[][] GetColumns()
+        {
+            var columns = new Square[8][];
+
+            for (int x = 0; x < 8; x++)
+            {
+                columns[x] = GetColumnByIndex(x);
+            }
+
+            return columns;
+        }
+
+        private Square[][] GetRows()
+        {
+            var rows = new Square[8][];
+
+            for (int y = 0; y < 8; y++)
+            {
+                rows[y] = GetRowByIndex(y);
+            }
+
+            return rows;
         }
 
         public void SetupGame()

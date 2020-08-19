@@ -147,6 +147,136 @@ namespace Racheschach.ChessSet.Tests
             Assert.Equal(Color.Black, b.GetSquareBySquareNotation("h8").Piece.Color);
         }
 
+        [Fact()]
+        public void GetRowByIndexTest()
+        {
+            Board b = new Board();
 
+            Square[] row1 = b.GetRowByIndex(0);
+            Assert.Equal("a1", row1[0].Notation);
+            Assert.Equal("b1", row1[1].Notation);
+            Assert.Equal("c1", row1[2].Notation);
+            Assert.Equal("d1", row1[3].Notation);
+            Assert.Equal("e1", row1[4].Notation);
+            Assert.Equal("f1", row1[5].Notation);
+            Assert.Equal("g1", row1[6].Notation);
+            Assert.Equal("h1", row1[7].Notation);
+
+            Square[] row8 = b.GetRowByIndex(7);
+            Assert.Equal("a8", row8[0].Notation);
+            Assert.Equal("b8", row8[1].Notation);
+            Assert.Equal("c8", row8[2].Notation);
+            Assert.Equal("d8", row8[3].Notation);
+            Assert.Equal("e8", row8[4].Notation);
+            Assert.Equal("f8", row8[5].Notation);
+            Assert.Equal("g8", row8[6].Notation);
+            Assert.Equal("h8", row8[7].Notation);
+
+            // try out of range index
+            Action act;
+
+            act = () => b.GetRowByIndex(8);
+            Assert.Throws<IndexOutOfRangeException>(act);
+        }
+
+        [Fact()]
+        public void GetColumnByIndexTest()
+        {
+            Board b = new Board();
+
+            Square[] colA = b.GetColumnByIndex(0);
+            Assert.Equal("a1", colA[0].Notation);
+            Assert.Equal("a2", colA[1].Notation);
+            Assert.Equal("a3", colA[2].Notation);
+            Assert.Equal("a4", colA[3].Notation);
+            Assert.Equal("a5", colA[4].Notation);
+            Assert.Equal("a6", colA[5].Notation);
+            Assert.Equal("a7", colA[6].Notation);
+            Assert.Equal("a8", colA[7].Notation);
+
+            Square[] colH = b.GetColumnByIndex(7);
+            Assert.Equal("h1", colH[0].Notation);
+            Assert.Equal("h2", colH[1].Notation);
+            Assert.Equal("h3", colH[2].Notation);
+            Assert.Equal("h4", colH[3].Notation);
+            Assert.Equal("h5", colH[4].Notation);
+            Assert.Equal("h6", colH[5].Notation);
+            Assert.Equal("h7", colH[6].Notation);
+            Assert.Equal("h8", colH[7].Notation);
+
+            // try out of range index
+            Action act;
+
+            act = () => b.GetColumnByIndex(8);
+            Assert.Throws<IndexOutOfRangeException>(act);
+        }
+
+        [Fact()]
+        public void GetRowOrColumnTest()
+        {
+            Board b = new Board();
+
+            Square[] colA = b.GetRowOrColumn('a');
+            Assert.Equal("a1", colA[0].Notation);
+            Assert.Equal("a2", colA[1].Notation);
+            Assert.Equal("a3", colA[2].Notation);
+            Assert.Equal("a4", colA[3].Notation);
+            Assert.Equal("a5", colA[4].Notation);
+            Assert.Equal("a6", colA[5].Notation);
+            Assert.Equal("a7", colA[6].Notation);
+            Assert.Equal("a8", colA[7].Notation);
+
+            Square[] colH = b.GetRowOrColumn('h');
+            Assert.Equal("h1", colH[0].Notation);
+            Assert.Equal("h2", colH[1].Notation);
+            Assert.Equal("h3", colH[2].Notation);
+            Assert.Equal("h4", colH[3].Notation);
+            Assert.Equal("h5", colH[4].Notation);
+            Assert.Equal("h6", colH[5].Notation);
+            Assert.Equal("h7", colH[6].Notation);
+            Assert.Equal("h8", colH[7].Notation);
+
+            Square[] row1 = b.GetRowOrColumn('1');
+            Assert.Equal("a1", row1[0].Notation);
+            Assert.Equal("b1", row1[1].Notation);
+            Assert.Equal("c1", row1[2].Notation);
+            Assert.Equal("d1", row1[3].Notation);
+            Assert.Equal("e1", row1[4].Notation);
+            Assert.Equal("f1", row1[5].Notation);
+            Assert.Equal("g1", row1[6].Notation);
+            Assert.Equal("h1", row1[7].Notation);
+
+            Square[] row8 = b.GetRowOrColumn('8');
+            Assert.Equal("a8", row8[0].Notation);
+            Assert.Equal("b8", row8[1].Notation);
+            Assert.Equal("c8", row8[2].Notation);
+            Assert.Equal("d8", row8[3].Notation);
+            Assert.Equal("e8", row8[4].Notation);
+            Assert.Equal("f8", row8[5].Notation);
+            Assert.Equal("g8", row8[6].Notation);
+            Assert.Equal("h8", row8[7].Notation);
+        }
+
+        [Fact()]
+        public void BoardRowsTest()
+        {
+            Board b = new Board();
+
+            Assert.Equal("a1", b.Rows[0][0].Notation);
+            Assert.Equal("a8", b.Rows[7][0].Notation);
+            Assert.Equal("h1", b.Rows[0][7].Notation);
+            Assert.Equal("h8", b.Rows[7][7].Notation);
+        }
+
+        [Fact()]
+        public void BoardColumnsTest()
+        {
+            Board b = new Board();
+
+            Assert.Equal("a1", b.Columns[0][0].Notation);
+            Assert.Equal("a8", b.Columns[0][7].Notation);
+            Assert.Equal("h1", b.Columns[7][0].Notation);
+            Assert.Equal("h8", b.Columns[7][7].Notation);
+        }
     }
 }
