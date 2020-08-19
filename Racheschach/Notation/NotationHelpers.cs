@@ -6,10 +6,6 @@ namespace Racheschach.Notation
 {
     public static class NotationHelpers
     {
-        //TODO: Relocate Methods htat are only relvent with Board-Class to Board-Class or somewhere extra
-        //TODO: Relocate universal Notation halpers to notation namespace
-
-
         public static bool IsValidColumnName(char columnName)
         {
             return (columnName >= 'a' && columnName <= 'h');
