@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Racheschach.Notations;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -21,6 +22,12 @@ namespace Racheschach.ChessSet
             }
 
             return output.ToString();
+        }
+
+        public static string BoardToFEN(Board board)
+        {
+            var foo = new FEN();
+            return "";
         }
     }
 }

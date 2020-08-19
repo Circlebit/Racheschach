@@ -5,6 +5,8 @@ namespace Racheschach.ChessSet
 {
     public static class NotationHelpers
     {
+        //TODO: Relocate Methods htat are only relvent with Board-Class to Board-Class or somewhere extra
+        //TODO: Relocate universal Notation halpers to notation namespace
         public static string SquareNotationByArrayIndex(int x, int y)
         {
             if (x >= 0 && y >= 0 && x < 8 && y < 8)
@@ -18,24 +20,31 @@ namespace Racheschach.ChessSet
             notation = notation.ToLower().Trim();
 
             if (notation.Length != 2 || !notation.All(Char.IsLetterOrDigit))
-                throw new Exception();
+                throw new ArgumentOutOfRangeException();
 
-            var foox = notation[0];
-            var foo = notation[0]-97;
+            return (ColumnNameToIndex(notation[0]), RowNameToIndex(notation[1]));
+        }
 
-            var barx = notation[1];
-            var bar = Convert.ToInt32(Char.GetNumericValue(notation[1])) - 1;
+        public static bool IsValidColumnName(char columnName)
+        {
+            return (columnName >= 'a' && columnName <= 'h');
+        }
 
-            bool b = foo >= 'a';
+        public static bool IsValidRowName(char rowName)
+        {
+            return (rowName >= '1' && rowName <= '8');
+        }
 
-            if (notation[0] >= 'a'
-             && notation[0] <= 'h'
-             && notation[1] >= '0'
-             && notation[1] <= '8')
-            {
-                return ((Convert.ToInt32(notation[0])-97), Convert.ToInt32(Char.GetNumericValue(notation[1]))-1);
-            }
-            else throw new Exception();
+        public static int RowNameToIndex(char rowName)
+        {
+            if (IsValidRowName(rowName)) return Convert.ToInt32(char.GetNumericValue(rowName)) - 1;
+            else throw new ArgumentOutOfRangeException();
+        }
+
+        public static int ColumnNameToIndex(char columnName)
+        {
+            if (IsValidColumnName(columnName)) return Convert.ToInt32(columnName) - 97;
+            else throw new ArgumentOutOfRangeException();
         }
 
         public static Char GetUniCodeForPiece(Color color, PieceType pieceType)

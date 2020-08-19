@@ -26,78 +26,27 @@ namespace Racheschach.ChessSet
             SetupGame();
         }
 
-        private void SetNeighborSquares()
+        public Square[] GetRowByIndex(int i)
         {
-            for (int x = 0; x < 8; x++)
+            return new Square[] { Squares[i, 0], Squares[i, 1], Squares[i, 2], Squares[i, 3], Squares[i, 4], Squares[i, 5], Squares[i, 6], Squares[i, 7] };
+        }
+
+        public Square[] GetColumnByIndex(int i)
+        {
+            return new Square[] { Squares[0, i], Squares[1, i], Squares[2, i], Squares[3, i], Squares[4, i], Squares[5, i], Squares[6, i], Squares[7, i] };
+        }
+
+        public Square[] GetRowOrColumn(char name)
+        {
+            if (NotationHelpers.IsValidRowName(name))
             {
-                for (int y = 0; y < 8; y++)
-                {
-                    //North
-                    try 
-                    {
-                        Squares[x, y].NorthNeighbor = Squares[x, y + 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthNeighbor);
-                    }
-                    catch (IndexOutOfRangeException) { };
-
-                    //NorthEast
-                    try 
-                    {
-                        Squares[x, y].NorthEastNeighbor = Squares[x + 1, y + 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthEastNeighbor);
-                    }
-                    catch (IndexOutOfRangeException) { };
-
-                    //East
-                    try 
-                    { 
-                        Squares[x, y].EastNeighbor = Squares[x + 1, y];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].EastNeighbor);
-                    }
-                    catch (IndexOutOfRangeException) { };
-
-                    //SouthEast
-                    try 
-                    { 
-                        Squares[x, y].SouthEastNeighbor = Squares[x + 1, y - 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthEastNeighbor);
-                    }
-                    catch (IndexOutOfRangeException) { };
-
-                    //South
-                    try 
-                    { 
-                        Squares[x, y].SouthNeighbor = Squares[x, y - 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthNeighbor);
-                    }
-                    catch (IndexOutOfRangeException) { };
-
-                    //SouthWest
-                    try 
-                    { 
-                        Squares[x, y].SouthWestNeighbor = Squares[x - 1, y - 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthWestNeighbor);
-                    }
-                    catch (IndexOutOfRangeException) { };
-
-                    //West
-                    try 
-                    { 
-                        Squares[x, y].WestNeighbor = Squares[x - 1, y];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].WestNeighbor);
-                    }
-                    catch (IndexOutOfRangeException) { };
-
-                    //NorthWest
-                    try 
-                    { 
-                        Squares[x, y].NorthWestNeighbor = Squares[x - 1, y + 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthWestNeighbor);
-                    }
-                    catch (IndexOutOfRangeException) { };
-                }
-            }      
-            
+                throw new ArgumentOutOfRangeException();
+            }
+            else if (NotationHelpers.IsValidColumnName(name))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else throw new ArgumentOutOfRangeException();
         }
 
         public Square GetSquareBySquareNotation(string notation)
@@ -154,6 +103,80 @@ namespace Racheschach.ChessSet
             {
                 Squares[i, rowIndex].Piece.PieceType = piecePattern[i];
                 Squares[i, rowIndex].Piece.Color = color;
+            }
+
+        }
+
+        private void SetNeighborSquares()
+        {
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    //North
+                    try
+                    {
+                        Squares[x, y].NorthNeighbor = Squares[x, y + 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthNeighbor);
+                    }
+                    catch (IndexOutOfRangeException) { };
+
+                    //NorthEast
+                    try
+                    {
+                        Squares[x, y].NorthEastNeighbor = Squares[x + 1, y + 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthEastNeighbor);
+                    }
+                    catch (IndexOutOfRangeException) { };
+
+                    //East
+                    try
+                    {
+                        Squares[x, y].EastNeighbor = Squares[x + 1, y];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].EastNeighbor);
+                    }
+                    catch (IndexOutOfRangeException) { };
+
+                    //SouthEast
+                    try
+                    {
+                        Squares[x, y].SouthEastNeighbor = Squares[x + 1, y - 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthEastNeighbor);
+                    }
+                    catch (IndexOutOfRangeException) { };
+
+                    //South
+                    try
+                    {
+                        Squares[x, y].SouthNeighbor = Squares[x, y - 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthNeighbor);
+                    }
+                    catch (IndexOutOfRangeException) { };
+
+                    //SouthWest
+                    try
+                    {
+                        Squares[x, y].SouthWestNeighbor = Squares[x - 1, y - 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthWestNeighbor);
+                    }
+                    catch (IndexOutOfRangeException) { };
+
+                    //West
+                    try
+                    {
+                        Squares[x, y].WestNeighbor = Squares[x - 1, y];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].WestNeighbor);
+                    }
+                    catch (IndexOutOfRangeException) { };
+
+                    //NorthWest
+                    try
+                    {
+                        Squares[x, y].NorthWestNeighbor = Squares[x - 1, y + 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthWestNeighbor);
+                    }
+                    catch (IndexOutOfRangeException) { };
+                }
             }
 
         }
