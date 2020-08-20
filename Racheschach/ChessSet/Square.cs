@@ -34,12 +34,12 @@ namespace Racheschach.ChessSet
             Neighbors = new List<Square>();
         }
 
-        public bool IsFriendlyPiece(Color friendlyColor)
+        public bool HasFriendlyPiece(Color friendlyColor)
         {
             return (!IsFree && Piece.Color == friendlyColor);
         }
 
-        public bool IsEnemyPiece(Color friendlyColor)
+        public bool HasEnemyPiece(Color friendlyColor)
         {
             return (!IsFree && Piece.Color == friendlyColor.Opposite());
         }

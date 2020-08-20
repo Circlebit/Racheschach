@@ -12,11 +12,10 @@ namespace Racheschach.ChessSet
 
         public Color ActiveColor => GetActiveColor();
 
-        //TODO: get => from movestack?
-        public bool WhiteCanCastleKingside { get; set; } = true;
-        public bool WhiteCanCastleQueenside { get; set; } = true;
-        public bool BlackCanCastleKingside { get; set; } = true;
-        public bool BlackCanCastleQueenside { get; set; } = true;
+        public bool WhiteCanCastleKingside => Moves.Peek().WhiteCanCastleKingside;
+        public bool WhiteCanCastleQueenside => Moves.Peek().WhiteCanCastleQueenside;
+        public bool BlackCanCastleKingside => Moves.Peek().BlackCanCastleKingside;
+        public bool BlackCanCastleQueenside => Moves.Peek().BlackCanCastleQueenside;
 
         /// <summary>
         /// is null or a possible en Passant field (in the last draw an enemy pawn went two steps from starting position)
@@ -57,10 +56,14 @@ namespace Racheschach.ChessSet
 
         public void PlayMove(Move move)
         {
-
+            
         }
         
-        //TODO: public Move GetNewMove(Squar)
+        //public Move GetNewMove(Square from, Square to)
+        //{
+        //    var move = new Move(from, to);
+        //    return move;
+        //}
 
         public Square[] GetRowByIndex(int i)
         {

@@ -50,12 +50,12 @@ namespace Racheschach.ChessSet
             while (nextSquare != null)
             {
                 // friendly piece on nextSquare -> can't go there
-                if (nextSquare.IsFriendlyPiece(this.Color)) break;
+                if (nextSquare.HasFriendlyPiece(this.Color)) break;
 
                 moves.Add(new Move(this.Square, nextSquare));
 
                 // enemy piece of nextSquare -> can't go beyond
-                if (nextSquare.IsEnemyPiece(this.Color)) break;
+                if (nextSquare.HasEnemyPiece(this.Color)) break;
             }
 
             return moves;
