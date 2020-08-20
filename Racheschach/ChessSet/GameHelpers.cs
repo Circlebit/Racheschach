@@ -12,7 +12,6 @@ namespace Racheschach.ChessSet
             {
                 case Color.White: return Color.Black;
                 case Color.Black: return Color.White;
-                case Color.None: return Color.None;
                 default: throw new ArgumentOutOfRangeException();
             }
         }

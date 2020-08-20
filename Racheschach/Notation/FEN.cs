@@ -49,7 +49,7 @@ namespace Racheschach.Notation
             {
                 for (int x = 0; x < 8; x++)
                 {
-                    board.Rows[y][x].Piece = FENcharToPieceType();
+                    //board.Rows[y][x].Piece = FENcharToPieceType();
                     //TODO: Board ohne StanniSetup constructen / Pieces zuweisen (Farbe und PieceType in einem schritt?)
                 }
             }

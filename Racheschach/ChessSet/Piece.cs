@@ -7,20 +7,11 @@ namespace Racheschach.ChessSet
 {
     public class Piece
     {
-        private PieceType pieceType;
-
         /// <summary>
-        /// The piece on the square. Whenever it is set to None Color ist also set to None.
+        /// The piece on the square
         /// </summary>
-        public PieceType PieceType
-        {
-            get => pieceType;
-            set
-            {
-                pieceType = value;
-                if (pieceType == PieceType.None) this.Color = Color.None;
-            }
-        }
+        public PieceType PieceType { get; set; }
+
         public Color Color { get; set; }
         public Color EnemyColor => GameHelpers.GetOppositeColor(Color);
 
@@ -29,9 +20,8 @@ namespace Racheschach.ChessSet
 
         public Square Square { get; set; }
 
-        public Piece(Color color, PieceType pieceType, Square square)
+        public Piece(PieceType pieceType, Square square)
         {
-            Color = color;
             PieceType = pieceType;
             Square = square;
         }

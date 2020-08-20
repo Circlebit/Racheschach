@@ -44,7 +44,6 @@ namespace Racheschach.Notation
                         case PieceType.Pawn: return '♟';
                         default: throw new Exception();
                     }
-                case Color.None: return ' ';
                 default: throw new Exception();
             }
         }
@@ -77,7 +76,6 @@ namespace Racheschach.Notation
                         case PieceType.Pawn: return 'p';
                         default: throw new Exception();
                     }
-                case Color.None: return '\0';
                 default: throw new Exception();
             }
         }

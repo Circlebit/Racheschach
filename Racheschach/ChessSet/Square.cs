@@ -29,7 +29,7 @@ namespace Racheschach.ChessSet
         {
             X = x;
             Y = y;
-            Piece = new Piece(Color.None, PieceType.None, this);
+            Piece = new Piece(PieceType.None, this);
             Board = board;
             Neighbors = new List<Square>();
         }

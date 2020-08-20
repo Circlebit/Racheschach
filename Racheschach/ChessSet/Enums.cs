@@ -17,9 +17,14 @@ namespace Racheschach.ChessSet
 
     public enum Color
     {
-        None,
         White,
         Black
     }
+
+    public static class ColorExtensions
+    {
+        public static Color Opposite(this Color c) => GameHelpers.GetOppositeColor(c);
+    }
+
 
 }

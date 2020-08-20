@@ -55,11 +55,12 @@ namespace Racheschach.ChessSet
 
         }
 
-        public void PlayMove()
+        public void PlayMove(Move move)
         {
 
         }
-        //  "K" (White can castle kingside), "Q" (White can castle queenside), "k" (Black can castle kingside), and/or "q" (Black can castle queenside)
+        
+        //TODO: public Move GetNewMove(Squar)
 
         public Square[] GetRowByIndex(int i)
         {
