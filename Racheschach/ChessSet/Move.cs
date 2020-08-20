@@ -12,7 +12,7 @@ namespace Racheschach.ChessSet
         public Move LastMove { get; }
 
         public Piece Piece => From.Piece;
-        public Color Color => GameHelpers.GetOppositeColor(LastMove.Color);
+        public Color Color => LastMove.Color.Opposite();
         public bool TakesPiece => To.IsEnemyPiece(Color);
 
         private Board Board => From.Board;

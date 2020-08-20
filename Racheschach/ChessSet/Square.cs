@@ -41,7 +41,7 @@ namespace Racheschach.ChessSet
 
         public bool IsEnemyPiece(Color friendlyColor)
         {
-            return (!IsFree && Piece.Color == GameHelpers.GetOppositeColor(friendlyColor));
+            return (!IsFree && Piece.Color == friendlyColor.Opposite());
         }
 
         private List<Square> GetThreateningSquares() //TODO: Square.GetThreateningSquares()

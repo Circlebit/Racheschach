@@ -13,7 +13,6 @@ namespace Racheschach.ChessSet
         public PieceType PieceType { get; set; }
 
         public Color Color { get; set; }
-        public Color EnemyColor => GameHelpers.GetOppositeColor(Color);
 
         public Char UniCode => NotationHelpers.GetUniCodeForPiece(Color, PieceType);
         public Char FEN => NotationHelpers.GetFENForPiece(Color, PieceType);

@@ -115,8 +115,8 @@ namespace Racheschach.ChessSet
 
         private Color GetActiveColor()
         {
-            if (Moves.Count == 0) return Color.White;
-            else return GameHelpers.GetOppositeColor(Moves.Peek().Color);
+            if (Moves.Count > 0) return Moves.Peek().Color.Opposite();
+            else return Color.White;
         }
 
         public void SetupGame()
