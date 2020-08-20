@@ -1,42 +1,58 @@
 ﻿using Racheschach.ChessSet;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Racheschach.Notation
 {
     public class FEN
     {
-        public string String { get; set; }
+        public string String { get; }
+        public Board Board { get; }
 
         public FEN(Board board)
         {
-            var result = new StringBuilder();
+            Board = board;
+            var sb = new StringBuilder();
 
             //FEN is Top to Bottom so we start at row 8
             for (int y = 7; y >= 0; y--)
             {
-                result.Append(ParseRowSquares(board.Rows[y]));
-                if (y != 0) result.Append('/');
+                sb.Append(ParseRowSquares(Board.Rows[y]));
+                if (y != 0) sb.Append('/');
             }
 
-            result.Append($" {(board.ActiveColor == Color.White ? 'w' : 'b')} ");
+            sb.Append($" {(Board.ActiveColor == Color.White ? 'w' : 'b')} ");
 
-            result.Append(board.WhiteCanCastleKingside ? "K" : "");
-            result.Append(board.WhiteCanCastleQueenside ? "Q" : "");
-            result.Append(board.BlackCanCastleKingside ? "k" : "");
-            result.Append(board.BlackCanCastleQueenside ? "q " : "");
-            result.Append(!board.WhiteCanCastleKingside && !board.WhiteCanCastleQueenside
-                       && !board.BlackCanCastleKingside && !board.BlackCanCastleQueenside
+            sb.Append(Board.WhiteCanCastleKingside ? "K" : "");
+            sb.Append(Board.WhiteCanCastleQueenside ? "Q" : "");
+            sb.Append(Board.BlackCanCastleKingside ? "k" : "");
+            sb.Append(Board.BlackCanCastleQueenside ? "q " : "");
+            sb.Append(!Board.WhiteCanCastleKingside && !Board.WhiteCanCastleQueenside
+                       && !Board.BlackCanCastleKingside && !Board.BlackCanCastleQueenside
                         ? "- " : "");
 
-            result.Append(board.EnPassant == null ? "-" : board.EnPassant.Notation);
+            sb.Append(Board.EnPassant == null ? "-" : Board.EnPassant.Notation);
+            sb.Append($" {Board.Halfmoves}");
+            sb.Append($" {Board.Fullmoves}");
 
-            result.Append($" {board.Halfmoves}");
+            String = sb.ToString();
+        }
 
-            result.Append($" {board.Fullmoves}");
+        public FEN(string s)
+        {
+            var board = new Board();
 
-            String = result.ToString();
+            string[] subStrings = s.Split(' ');
+            string[] rowStrings = subStrings[0].Split(' ');
+
+            //FEN is Top to Bottom so we start at row 8
+            for (int y = 7; y >= 0; y--)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    board.Rows[y][x].Piece = FENcharToPieceType();
+                    //TODO: Board ohne StanniSetup constructen / Pieces zuweisen (Farbe und PieceType in einem schritt?)
+                }
+            }
         }
 
         public string ParseRowSquares(Square[] squares)

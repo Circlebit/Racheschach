@@ -1,8 +1,4 @@
 ﻿using Xunit;
-using Racheschach.Notation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Racheschach.ChessSet;
 
 namespace Racheschach.Notation.Tests
@@ -10,7 +6,7 @@ namespace Racheschach.Notation.Tests
     public class FENTests
     {
         [Fact()]
-        public void FENFreshlySetupTest()
+        public void FENByBoardFreshlySetupTest()
         {
             var b = new Board();
             var fen = new FEN(b);
