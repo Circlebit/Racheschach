@@ -23,6 +23,12 @@ namespace Racheschach.ChessSet
             PieceType = pieceType;
             Color = color;
         }
+
+        public ColorPiece(Piece piece)
+        {
+            PieceType = piece.ColorPiece.PieceType;
+            Color = piece.ColorPiece.Color;
+        }
     }
 
     public class Piece
@@ -80,7 +86,7 @@ namespace Racheschach.ChessSet
             Square nextSquare;
 
             //Moves towards North
-            nextSquare = this.Square.NorthNeighbor;
+            nextSquare = this.Square.North;
             while (nextSquare != null)
             {
                 // friendly piece on nextSquare -> can't go there

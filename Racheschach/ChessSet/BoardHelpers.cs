@@ -46,13 +46,29 @@ namespace Racheschach.ChessSet
 
         public static int RowNameToIndex(char rowName)
         {
-            if (NotationHelpers.IsValidRowName(rowName)) return Convert.ToInt32(char.GetNumericValue(rowName)) - 1;
+            if (NotationHelpers.IsValidRowName(rowName)) 
+                return Convert.ToInt32(char.GetNumericValue(rowName)) - 1;
             else throw new ArgumentOutOfRangeException();
         }
 
         public static int ColumnNameToIndex(char columnName)
         {
-            if (NotationHelpers.IsValidColumnName(columnName)) return Convert.ToInt32(columnName) - 97;
+            if (NotationHelpers.IsValidColumnName(columnName)) 
+                return Convert.ToInt32(columnName) - 97;
+            else throw new ArgumentOutOfRangeException();
+        }
+
+        public static char RowIndexToRowName(int rowIndex)
+        {
+            if (rowIndex > 0 && rowIndex < 8)
+                return (char)(rowIndex + 49);
+            else throw new ArgumentOutOfRangeException();
+        }
+
+        public static char ColumnIndexToColumnName(int columnIndex)
+        {
+            if (columnIndex > 0 && columnIndex < 8)
+                return (char)(columnIndex + 97);
             else throw new ArgumentOutOfRangeException();
         }
 

@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Racheschach.ChessSet
+{
+    internal class InitialMove : IMove
+    {
+        public Square From => null;
+
+        public Square To => null;
+
+        public IMove LastMove => null;
+
+        public ColorPiece ColorPiece => null;
+
+        public Color Color => Color.Black;
+
+        public bool TakesPiece => false;
+
+        public Square EnPassant => null;
+
+        public bool IsHalfMove => false;
+
+        public int HalfMoves => 0;
+
+        public bool WhiteCanCastleKingside => true;
+
+        public bool WhiteCanCastleQueenside => true;
+
+        public bool BlackCanCastleKingside => true;
+
+        public bool BlackCanCastleQueenside => true;
+
+        public int MoveNumber => 0;
+
+    }
+}

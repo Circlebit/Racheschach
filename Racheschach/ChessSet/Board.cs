@@ -8,7 +8,7 @@ namespace Racheschach.ChessSet
     public class Board
     {
         public Square[,] Squares { get; set; }
-        public Stack<Move> Moves { get; set; }
+        public Stack<IMove> Moves { get; set; }
 
         public Color ActiveColor => GetActiveColor();
 
@@ -20,17 +20,17 @@ namespace Racheschach.ChessSet
         /// <summary>
         /// is null or a possible en Passant field (in the last draw an enemy pawn went two steps from starting position)
         /// </summary>
-        public Square EnPassant { get; set; } //TODO: get => from movestack?
+        public Square EnPassant => Moves.Peek().EnPassant;
 
         /// <summary>
         /// Number of moves without movement of any pawn and without any capture (needed for 50-move rule)
         /// </summary>
-        public int Halfmoves { get; set; } //TODO: get => from movestack?
+        public int Halfmoves => Moves.Peek().HalfMoves;
 
         /// <summary>
         /// Number of moves. Incremented after every black move
         /// </summary>
-        public int Fullmoves => (Moves.Count / 2) + 1;
+        public int Fullmoves => ((Moves.Count - 1) / 2) + 1;
 
         public Square[][] Rows => GetRows();
         public Square[][] Columns => GetColumns();
@@ -49,18 +49,25 @@ namespace Racheschach.ChessSet
             }
 
             SetNeighborSquares();
-            Moves = new Stack<Move>();
+            Moves = new Stack<IMove>();
         }
 
         public void PlayMove(Move move)
         {
             Moves.Push(move);
+            move.To.SetPiece(move.ColorPiece);
+            move.From.SetPiece();
         }
 
         public Move GetNewMove(Square from, Square to)
         {
             var move = new Move(from, to);
             return move;
+        }
+
+        public Move GetNewMove(string from, string to)
+        {
+            return GetNewMove(GetSquareBySquareNotation(from), GetSquareBySquareNotation(to));
         }
 
         public Square[] GetRowByIndex(int i)
@@ -126,7 +133,8 @@ namespace Racheschach.ChessSet
             SetupPawns(Color.Black);
             SetupPieces(Color.White);
             SetupPieces(Color.Black);
-            Moves = new Stack<Move>();
+            Moves = new Stack<IMove>();
+            Moves.Push(new InitialMove());
         }
 
         private void SetupPawns(Color color)
@@ -179,64 +187,64 @@ namespace Racheschach.ChessSet
                     //North
                     try
                     {
-                        Squares[x, y].NorthNeighbor = Squares[x, y + 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthNeighbor);
+                        Squares[x, y].North = Squares[x, y + 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].North);
                     }
                     catch (IndexOutOfRangeException) { };
 
                     //NorthEast
                     try
                     {
-                        Squares[x, y].NorthEastNeighbor = Squares[x + 1, y + 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthEastNeighbor);
+                        Squares[x, y].NorthEast = Squares[x + 1, y + 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthEast);
                     }
                     catch (IndexOutOfRangeException) { };
 
                     //East
                     try
                     {
-                        Squares[x, y].EastNeighbor = Squares[x + 1, y];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].EastNeighbor);
+                        Squares[x, y].East = Squares[x + 1, y];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].East);
                     }
                     catch (IndexOutOfRangeException) { };
 
                     //SouthEast
                     try
                     {
-                        Squares[x, y].SouthEastNeighbor = Squares[x + 1, y - 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthEastNeighbor);
+                        Squares[x, y].SouthEast = Squares[x + 1, y - 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthEast);
                     }
                     catch (IndexOutOfRangeException) { };
 
                     //South
                     try
                     {
-                        Squares[x, y].SouthNeighbor = Squares[x, y - 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthNeighbor);
+                        Squares[x, y].South = Squares[x, y - 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].South);
                     }
                     catch (IndexOutOfRangeException) { };
 
                     //SouthWest
                     try
                     {
-                        Squares[x, y].SouthWestNeighbor = Squares[x - 1, y - 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthWestNeighbor);
+                        Squares[x, y].SouthWest = Squares[x - 1, y - 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].SouthWest);
                     }
                     catch (IndexOutOfRangeException) { };
 
                     //West
                     try
                     {
-                        Squares[x, y].WestNeighbor = Squares[x - 1, y];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].WestNeighbor);
+                        Squares[x, y].West = Squares[x - 1, y];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].West);
                     }
                     catch (IndexOutOfRangeException) { };
 
                     //NorthWest
                     try
                     {
-                        Squares[x, y].NorthWestNeighbor = Squares[x - 1, y + 1];
-                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthWestNeighbor);
+                        Squares[x, y].NorthWest = Squares[x - 1, y + 1];
+                        Squares[x, y].Neighbors.Add(Squares[x, y].NorthWest);
                     }
                     catch (IndexOutOfRangeException) { };
                 }

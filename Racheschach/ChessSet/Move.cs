@@ -4,18 +4,31 @@ using System.Text;
 
 namespace Racheschach.ChessSet
 {
-    public class Move
+    public class Move : IMove
     {
         public Square From { get; }
         public Square To { get; }
 
-        public Move LastMove { get; }
+        public IMove LastMove { get; }
 
-        public Piece Piece => From.Piece;
+        public ColorPiece ColorPiece { get; }
         public Color Color => LastMove.Color.Opposite();
         public bool TakesPiece => To.HasEnemyPiece(Color);
 
-        public bool IsHalfMove => !TakesPiece && Piece.PieceType != PieceType.Pawn;
+        public Square EnPassant => GetEnPassant();
+
+        private Square GetEnPassant()
+        {
+            var foo = Color.PawnRow();
+
+            if (ColorPiece.PieceType == PieceType.Pawn
+                && From.RowName == Color.PawnRow()
+                && To == From.Forwards(Color).Forwards(Color))
+                return From.Forwards(Color);
+            else return null;
+        }
+
+        public bool IsHalfMove => !TakesPiece && ColorPiece.PieceType != PieceType.Pawn;
         public int HalfMoves => IsHalfMove ? LastMove.HalfMoves + 1 : 0;
 
         public bool WhiteCanCastleKingside { get; private set; }
@@ -31,6 +44,7 @@ namespace Racheschach.ChessSet
         {
             From = from;
             To = to;
+            ColorPiece = new ColorPiece(from.Piece);
 
             LastMove = Board.Moves.Peek();
 
@@ -42,5 +56,6 @@ namespace Racheschach.ChessSet
             BlackCanCastleKingside = true;
             BlackCanCastleQueenside = true;
         }
+
     }
 }
