@@ -20,6 +20,7 @@ namespace Racheschach.ChessSet.Tests
         public void BoardToUnicodeTest()
         {
             var b = new Board();
+            b.SetupGame();
             string s = BoardHelpers.BoardToUnicode(b);
             output.WriteLine(s);
             Assert.True(false, "This test needs an implementation");

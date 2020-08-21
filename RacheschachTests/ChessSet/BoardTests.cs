@@ -63,6 +63,8 @@ namespace Racheschach.ChessSet.Tests
         public void SetupGameTest_WhitePawns()
         {
             Board b = new Board();
+            b.SetupGame();
+
             Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("a2").Piece.PieceType);
             Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("b2").Piece.PieceType);
             Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("c2").Piece.PieceType);
@@ -85,6 +87,8 @@ namespace Racheschach.ChessSet.Tests
         public void SetupGameTest_WhitePieces()
         {
             Board b = new Board();
+            b.SetupGame();
+
             Assert.Equal(PieceType.Rook, b.GetSquareBySquareNotation("a1").Piece.PieceType);
             Assert.Equal(PieceType.Knight, b.GetSquareBySquareNotation("b1").Piece.PieceType);
             Assert.Equal(PieceType.Bishop, b.GetSquareBySquareNotation("c1").Piece.PieceType);
@@ -107,6 +111,8 @@ namespace Racheschach.ChessSet.Tests
         public void SetupGameTest_BlackPawns()
         {
             Board b = new Board();
+            b.SetupGame();
+
             Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("a7").Piece.PieceType);
             Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("b7").Piece.PieceType);
             Assert.Equal(PieceType.Pawn, b.GetSquareBySquareNotation("c7").Piece.PieceType);
@@ -129,6 +135,8 @@ namespace Racheschach.ChessSet.Tests
         public void SetupGameTest_BlackPieces()
         {
             Board b = new Board();
+            b.SetupGame();
+
             Assert.Equal(PieceType.Rook, b.GetSquareBySquareNotation("a8").Piece.PieceType);
             Assert.Equal(PieceType.Knight, b.GetSquareBySquareNotation("b8").Piece.PieceType);
             Assert.Equal(PieceType.Bishop, b.GetSquareBySquareNotation("c8").Piece.PieceType);

@@ -5,23 +5,57 @@ using System.Text;
 
 namespace Racheschach.ChessSet
 {
+    public class ColorPiece
+    {
+        public PieceType PieceType { get; set; }
+        public Color Color { get; set; } //TODO: return some non-value when PieceType.None
+
+        /// <summary>
+        /// new ColorPiece of PieceType.None
+        /// </summary>
+        public ColorPiece()
+        {
+            PieceType = PieceType.None;
+        }
+
+        public ColorPiece(PieceType pieceType, Color color)
+        {
+            PieceType = pieceType;
+            Color = color;
+        }
+    }
+
     public class Piece
     {
-        /// <summary>
-        /// The piece on the square
-        /// </summary>
-        public PieceType PieceType { get; set; }
 
-        public Color Color { get; set; }
+        public ColorPiece ColorPiece { get; set; }
+        public PieceType PieceType => ColorPiece.PieceType;
+
+        public Color Color => ColorPiece.Color;
 
         public Char UniCode => NotationHelpers.GetUniCodeForPiece(Color, PieceType);
         public Char FEN => NotationHelpers.GetFENForPiece(Color, PieceType);
 
         public Square Square { get; set; }
 
-        public Piece(PieceType pieceType, Square square)
+        /// <summary>
+        /// new piece of PieceType.None
+        /// </summary>
+        public Piece(Square square)
         {
-            PieceType = pieceType;
+            ColorPiece = new ColorPiece();
+            Square = square;
+        }
+
+        public Piece(PieceType pieceType, Color color, Square square)
+        {
+            ColorPiece = new ColorPiece(pieceType, color);
+            Square = square;
+        }
+
+        public Piece(ColorPiece colorPiece, Square square)
+        {
+            ColorPiece = new ColorPiece(colorPiece.PieceType, colorPiece.Color);
             Square = square;
         }
 

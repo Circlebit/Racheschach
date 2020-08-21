@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace RacheschachTests.ChessSet
+namespace Racheschach.ChessSet.Tests
 {
     public class BoardSquareNeighborTests
     {

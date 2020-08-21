@@ -8,7 +8,7 @@ namespace Racheschach.ChessSet
     {
         public int X { get; }
         public int Y { get; }
-        public Piece Piece { get; }
+        public Piece Piece { get; set; }
         public Board Board { get;  }
 
         public List<Square> Neighbors { get; set; }
@@ -29,7 +29,7 @@ namespace Racheschach.ChessSet
         {
             X = x;
             Y = y;
-            Piece = new Piece(PieceType.None, this);
+            Piece = new Piece(this);
             Board = board;
             Neighbors = new List<Square>();
         }
@@ -47,6 +47,20 @@ namespace Racheschach.ChessSet
         private List<Square> GetThreateningSquares() //TODO: Square.GetThreateningSquares()
         {
             throw new NotImplementedException();
+        }
+
+        public void SetPiece(ColorPiece colorPiece)
+        {
+            Piece.ColorPiece.PieceType = colorPiece.PieceType;
+            Piece.ColorPiece.Color = colorPiece.Color;
+        }
+
+        /// <summary>
+        /// set piece to None
+        /// </summary>
+        public void SetPiece()
+        {
+            SetPiece(new ColorPiece());
         }
     }
 }

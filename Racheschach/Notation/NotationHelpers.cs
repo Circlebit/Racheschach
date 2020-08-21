@@ -1,5 +1,6 @@
 ﻿using Racheschach.ChessSet;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Racheschach.Notation
@@ -80,5 +81,60 @@ namespace Racheschach.Notation
             }
         }
 
+        public static ColorPiece GetColorPieceByFENChar(char c)
+        {
+            if (!IsValidFENChar(c)) throw new ArgumentOutOfRangeException();
+            if (Char.IsDigit(c)) return new ColorPiece(); // empty square(s)
+            if (Char.IsUpper(c)) // White
+            {
+                switch (c)
+                {
+                    case 'K': return new ColorPiece(PieceType.King, Color.White);
+                    case 'Q': return new ColorPiece(PieceType.Queen, Color.White);
+                    case 'R': return new ColorPiece(PieceType.Rook, Color.White);
+                    case 'B': return new ColorPiece(PieceType.Bishop, Color.White);
+                    case 'N': return new ColorPiece(PieceType.Knight, Color.White);
+                    case 'P': return new ColorPiece(PieceType.Pawn, Color.White);
+                }
+            }
+            if(Char.IsLower(c)) // Black
+            {
+                switch (c)
+                {
+                    case 'k': return new ColorPiece(PieceType.King, Color.Black);
+                    case 'q': return new ColorPiece(PieceType.Queen, Color.Black);
+                    case 'r': return new ColorPiece(PieceType.Rook, Color.Black);
+                    case 'b': return new ColorPiece(PieceType.Bishop, Color.Black);
+                    case 'n': return new ColorPiece(PieceType.Knight, Color.Black);
+                    case 'p': return new ColorPiece(PieceType.Pawn, Color.Black);
+                }
+            }
+            throw new Exception();
+        }
+
+        public static ColorPiece[] GetColorPiecesByFENRow(string fenRow)
+        {
+            List<ColorPiece> pieces = new List<ColorPiece>();
+
+            foreach (char c in fenRow)
+            {
+                ColorPiece cp = GetColorPieceByFENChar(c);
+                if (GetColorPieceByFENChar(c).PieceType == PieceType.None)
+                {
+                    int numberOfEmptySquares = Convert.ToInt32(Char.GetNumericValue(c));
+                    pieces.AddRange(Enumerable.Repeat(new ColorPiece(), numberOfEmptySquares));
+                }
+                else pieces.Add(cp);
+            }
+
+            return pieces.ToArray();
+        }
+
+
+        private static bool IsValidFENChar(char c)
+        {
+            return "kqrbnpKQRBNP12345678".Contains(c);
+        }
     }
+
 }

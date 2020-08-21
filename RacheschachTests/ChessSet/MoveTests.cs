@@ -6,14 +6,11 @@ using System.Text;
 
 namespace Racheschach.ChessSet.Tests
 {
-    public class PieceTests
+    public class MoveTests
     {
         [Fact()]
-        public void GetPossibleRookMovesTest()
+        public void MoveTest()
         {
-            var b = new Board();
-            b.SetupGame();
-
             Assert.True(false, "This test needs an implementation");
         }
     }

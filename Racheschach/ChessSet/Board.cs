@@ -12,10 +12,10 @@ namespace Racheschach.ChessSet
 
         public Color ActiveColor => GetActiveColor();
 
-        public bool WhiteCanCastleKingside => Moves.Peek().WhiteCanCastleKingside;
-        public bool WhiteCanCastleQueenside => Moves.Peek().WhiteCanCastleQueenside;
-        public bool BlackCanCastleKingside => Moves.Peek().BlackCanCastleKingside;
-        public bool BlackCanCastleQueenside => Moves.Peek().BlackCanCastleQueenside;
+        public bool WhiteCanCastleKingside => true; // Moves.Peek().WhiteCanCastleKingside;
+        public bool WhiteCanCastleQueenside => true; // Moves.Peek().WhiteCanCastleQueenside;
+        public bool BlackCanCastleKingside => true; // Moves.Peek().BlackCanCastleKingside;
+        public bool BlackCanCastleQueenside => true; // Moves.Peek().BlackCanCastleQueenside;
 
         /// <summary>
         /// is null or a possible en Passant field (in the last draw an enemy pawn went two steps from starting position)
@@ -49,21 +49,19 @@ namespace Racheschach.ChessSet
             }
 
             SetNeighborSquares();
-
-            SetupGame();
-
+            Moves = new Stack<Move>();
         }
 
         public void PlayMove(Move move)
         {
-            
+            Moves.Push(move);
         }
-        
-        //public Move GetNewMove(Square from, Square to)
-        //{
-        //    var move = new Move(from, to);
-        //    return move;
-        //}
+
+        public Move GetNewMove(Square from, Square to)
+        {
+            var move = new Move(from, to);
+            return move;
+        }
 
         public Square[] GetRowByIndex(int i)
         {
@@ -141,8 +139,7 @@ namespace Racheschach.ChessSet
 
             for (int x = 0; x < 8; x++)
             {
-                Squares[x, rowIndex].Piece.PieceType = PieceType.Pawn;
-                Squares[x, rowIndex].Piece.Color = color;
+                Squares[x, rowIndex].Piece.ColorPiece = new ColorPiece(PieceType.Pawn, color);
             }
         }
 
@@ -168,8 +165,7 @@ namespace Racheschach.ChessSet
 
             for (int i = 0; i < piecePattern.Length; i++)
             {
-                Squares[i, rowIndex].Piece.PieceType = piecePattern[i];
-                Squares[i, rowIndex].Piece.Color = color;
+                Squares[i, rowIndex].Piece.ColorPiece = new ColorPiece(piecePattern[i], color);
             }
 
         }

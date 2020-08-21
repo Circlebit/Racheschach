@@ -1,4 +1,5 @@
 ﻿using Racheschach.ChessSet;
+using System;
 using System.Text;
 
 namespace Racheschach.Notation
@@ -39,18 +40,21 @@ namespace Racheschach.Notation
 
         public FEN(string s)
         {
-            var board = new Board();
+            String = s;
+            Board = new Board();
 
-            string[] subStrings = s.Split(' ');
-            string[] rowStrings = subStrings[0].Split(' ');
+            string[] subStrings = String.Split(' ');
+            string[] rowStrings = subStrings[0].Split('/');
+            Array.Reverse(rowStrings); // reverse FEN rows so indexes are like board rows (bottom to top)
 
-            //FEN is Top to Bottom so we start at row 8
-            for (int y = 7; y >= 0; y--)
+            for (int y = 0; y < 8; y++)
             {
+                ColorPiece[] cPieceRowFromFen = NotationHelpers.GetColorPiecesByFENRow(rowStrings[y]);
+                Square[] squareRowFromBoard = Board.Rows[y];
+
                 for (int x = 0; x < 8; x++)
                 {
-                    //board.Rows[y][x].Piece = FENcharToPieceType();
-                    //TODO: Board ohne StanniSetup constructen / Pieces zuweisen (Farbe und PieceType in einem schritt?)
+                    squareRowFromBoard[x].SetPiece(cPieceRowFromFen[x]);
                 }
             }
         }
