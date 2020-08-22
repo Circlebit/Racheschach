@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Racheschach", "Racheschach\Racheschach.csproj", "{2A1F33F0-B1A5-4E07-91D8-B76B936E5709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RacheschachTests", "RacheschachTests\RacheschachTests.csproj", "{00502635-49F6-4231-8C70-7925FA22BB5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RacheschachTests", "RacheschachTests\RacheschachTests.csproj", "{00502635-49F6-4231-8C70-7925FA22BB5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

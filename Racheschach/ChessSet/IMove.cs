@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace Racheschach.ChessSet
 {
-    public interface IMove : IEquatable<Move>
+    public interface IMove : IEquatable<IMove>, IEquatable<Move>
     {
         Square From { get; }
         Square To { get; }
@@ -26,6 +27,21 @@ namespace Racheschach.ChessSet
 
         int MoveNumber { get; }
         Board Board { get; }
+
     }
 
+    public class MoveEqualityComparer : IEqualityComparer<IMove>
+    {
+        public bool Equals(IMove x, IMove y)
+        {
+            return x.Board.Equals(y.Board)
+                && (x.From.Equals(y.From))
+                && (x.To.Equals(y.To));
+        }
+
+        public int GetHashCode(IMove obj)
+        {
+            return obj.Board.GetHashCode() * 17 + obj.From.GetHashCode() + obj.To.GetHashCode();
+        }
+    }
 }

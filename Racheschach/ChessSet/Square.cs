@@ -153,7 +153,11 @@ namespace Racheschach.ChessSet
 
         public bool Equals(Square other)
         {
-            return (this.X == other.X && this.Y == other.Y);
+            try
+            {
+                return (this.X == other.X && this.Y == other.Y);
+            }
+            catch { return false; }
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Racheschach.ChessSet
 {
-    public class Move : IMove, IEquatable<Move>
+    public class Move : IMove, IEquatable<IMove>, IEquatable<Move>
     {
         public Square From { get; }
         public Square To { get; }
@@ -57,11 +57,20 @@ namespace Racheschach.ChessSet
             else return null;
         }
 
+        public bool Equals(IMove other)
+        {
+            try
+            {
+                return this.Board.Equals(other.Board)
+                    && (this.From.Equals(other.From))
+                    && (this.To.Equals(other.To));
+            }
+            catch { return false; }
+        }
+
         public bool Equals(Move other)
         {
-            return this.Board.Equals(other.Board)
-                && (this.From.Equals(other.From))
-                && (this.To.Equals(other.To));
+            return this.Equals((IMove)other);
         }
     }
 }

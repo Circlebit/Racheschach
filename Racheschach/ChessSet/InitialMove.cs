@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Racheschach.ChessSet
 {
-    internal class InitialMove : IMove
+    public class InitialMove : IMove, IEquatable<IMove>, IEquatable<Move>
     {
         public Square From => null;
 
@@ -41,9 +41,14 @@ namespace Racheschach.ChessSet
             Board = board;
         }
 
-        public bool Equals(Move other)
+        public bool Equals(IMove other)
         {
             return other is InitialMove;
+        }
+
+        public bool Equals(Move other)
+        {
+            return false;
         }
     }
 }
