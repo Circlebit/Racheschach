@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Racheschach.ChessSet.Tests
 {
-    public class PieceTests
+    public class PieceRookTests
     {
         [Fact()]
         public void GetPossibleRookMovesTest()
@@ -14,7 +14,15 @@ namespace Racheschach.ChessSet.Tests
             var b = new Board();
             b.SetupGame();
 
-            Assert.True(false, "This test needs an implementation");
+            Assert.Equal(new List<Move>(), b.GetSquareBySquareNotation("a1").Piece.GetPossibleMoves());
+
+            b.PlayMove(b.GetNewMove("a2", "a3"));
+
+            //TODO: make moves comparable (from/to, boardstate);
+
+            //Assert.Equal(new List<Move>() { b.GetSquareBySquareNotation("a2") },
+            //    b.GetSquareBySquareNotation("a1").Piece.GetPossibleMoves());
+
         }
     }
 }

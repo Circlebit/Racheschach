@@ -286,5 +286,25 @@ namespace Racheschach.ChessSet.Tests
             Assert.Equal("h1", b.Columns[7][0].Notation);
             Assert.Equal("h8", b.Columns[7][7].Notation);
         }
+
+        [Fact()]
+        public void BoardEqualsTest()
+        {
+            var b1 = new Board();
+            b1.SetupGame();
+
+            var b2 = new Board();
+            b2.SetupGame();
+
+            Assert.True(b1.Equals(b2));
+
+            b1.PlayMove(b1.GetNewMove("e2","e4"));
+            Assert.False(b1.Equals(b2));
+
+            b2.PlayMove(b2.GetNewMove("e2", "e4"));
+            Assert.True(b1.Equals(b2));
+
+        }
+
     }
 }

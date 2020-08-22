@@ -1,11 +1,12 @@
 ﻿using Racheschach.Notation;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace Racheschach.ChessSet
 {
-    public class Board
+    public class Board : IEquatable<Board>
     {
         public Square[,] Squares { get; set; }
         public Stack<IMove> Moves { get; set; }
@@ -13,10 +14,10 @@ namespace Racheschach.ChessSet
 
         public Color ActiveColor => GetActiveColor();
 
-        public bool WhiteCanCastleKingside => true; // Moves.Peek().WhiteCanCastleKingside;
-        public bool WhiteCanCastleQueenside => true; // Moves.Peek().WhiteCanCastleQueenside;
-        public bool BlackCanCastleKingside => true; // Moves.Peek().BlackCanCastleKingside;
-        public bool BlackCanCastleQueenside => true; // Moves.Peek().BlackCanCastleQueenside;
+        public bool WhiteCanCastleKingside => LastMove.WhiteCanCastleKingside;
+        public bool WhiteCanCastleQueenside => LastMove.WhiteCanCastleQueenside;
+        public bool BlackCanCastleKingside => LastMove.BlackCanCastleKingside;
+        public bool BlackCanCastleQueenside => LastMove.BlackCanCastleQueenside;
 
         /// <summary>
         /// is null or a possible en Passant field (in the last draw an enemy pawn went two steps from starting position)
@@ -74,6 +75,7 @@ namespace Racheschach.ChessSet
             return GetNewMove(GetSquareBySquareNotation(from), GetSquareBySquareNotation(to));
         }
 
+
         public Square[] GetRowByIndex(int i)
         {
             return new Square[] { Squares[0, i], Squares[1, i], Squares[2, i], Squares[3, i], Squares[4, i], Squares[5, i], Squares[6, i], Squares[7, i] };
@@ -125,11 +127,13 @@ namespace Racheschach.ChessSet
             return rows;
         }
 
+
         private Color GetActiveColor()
         {
             if (Moves.Count > 0) return LastMove.Color.Opposite();
             else return Color.White;
         }
+
 
         public void SetupGame()
         {
@@ -138,8 +142,6 @@ namespace Racheschach.ChessSet
             SetupPieces(Color.White);
             SetupPieces(Color.Black);
         }
-
-
 
         private void SetupPawns(Color color)
         {
@@ -255,6 +257,12 @@ namespace Racheschach.ChessSet
             }
 
         }
+
+        public bool Equals(Board other)
+        {
+            return new FEN(this).String == new FEN(other).String;
+        }
+
     }
 
 }
