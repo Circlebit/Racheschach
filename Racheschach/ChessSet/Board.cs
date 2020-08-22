@@ -9,6 +9,7 @@ namespace Racheschach.ChessSet
     {
         public Square[,] Squares { get; set; }
         public Stack<IMove> Moves { get; set; }
+        public IMove LastMove { get; private set; }
 
         public Color ActiveColor => GetActiveColor();
 
@@ -20,12 +21,12 @@ namespace Racheschach.ChessSet
         /// <summary>
         /// is null or a possible en Passant field (in the last draw an enemy pawn went two steps from starting position)
         /// </summary>
-        public Square EnPassant => Moves.Peek().EnPassant;
+        public Square EnPassant => LastMove.EnPassant;
 
         /// <summary>
         /// Number of moves without movement of any pawn and without any capture (needed for 50-move rule)
         /// </summary>
-        public int Halfmoves => Moves.Peek().HalfMoves;
+        public int Halfmoves => LastMove.HalfMoves;
 
         /// <summary>
         /// Number of moves. Incremented after every black move
@@ -50,13 +51,21 @@ namespace Racheschach.ChessSet
 
             SetNeighborSquares();
             Moves = new Stack<IMove>();
+            PlayIninitalMove();
         }
 
-        public void PlayMove(Move move)
+        public void PlayMove(IMove move)
         {
             Moves.Push(move);
             move.To.SetPiece(move.ColorPiece);
             move.From.SetPiece();
+            LastMove = Moves.Peek();
+        }
+
+        private void PlayIninitalMove()
+        {
+            Moves.Push(new InitialMove());
+            LastMove = Moves.Peek();
         }
 
         public Move GetNewMove(Square from, Square to)
@@ -123,7 +132,7 @@ namespace Racheschach.ChessSet
 
         private Color GetActiveColor()
         {
-            if (Moves.Count > 0) return Moves.Peek().Color.Opposite();
+            if (Moves.Count > 0) return LastMove.Color.Opposite();
             else return Color.White;
         }
 
@@ -133,9 +142,9 @@ namespace Racheschach.ChessSet
             SetupPawns(Color.Black);
             SetupPieces(Color.White);
             SetupPieces(Color.Black);
-            Moves = new Stack<IMove>();
-            Moves.Push(new InitialMove());
         }
+
+
 
         private void SetupPawns(Color color)
         {
