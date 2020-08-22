@@ -34,5 +34,16 @@ namespace Racheschach.ChessSet
 
         public int MoveNumber => 0;
 
+        public Board Board { get; set; }
+
+        public InitialMove(Board board)
+        {
+            Board = board;
+        }
+
+        public bool Equals(Move other)
+        {
+            return other is InitialMove;
+        }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Racheschach.ChessSet
 {
-    public class Square
+    public class Square : IEquatable<Square>
     {
         public int X { get; }
         public int Y { get; }
@@ -26,7 +26,9 @@ namespace Racheschach.ChessSet
         public char ColumnName => BoardHelpers.ColumnIndexToColumnName(X);
 
         public bool IsFree => Piece.PieceType == PieceType.None;
-        public List<Square> ThreateningSquares => GetThreateningSquares();
+        
+        //TODO: uncomment this after dev
+        //public List<Square> ThreateningSquares => GetThreateningSquares();
         public string Notation => BoardHelpers.SquareNotationByArrayIndex(X, Y);
 
         public Square(int x, int y, Board board)
@@ -48,10 +50,11 @@ namespace Racheschach.ChessSet
             return (!IsFree && Piece.Color == friendlyColor.Opposite());
         }
 
-        private List<Square> GetThreateningSquares() //TODO: Square.GetThreateningSquares()
-        {
-            throw new NotImplementedException();
-        }
+        //TODO: Square.GetThreateningSquares()
+        //private List<Square> GetThreateningSquares() //TODO: Square.GetThreateningSquares()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public void SetPiece(ColorPiece colorPiece)
         {
@@ -146,6 +149,11 @@ namespace Racheschach.ChessSet
                 case Color.Black: return SouthEast;
                 default: throw new ArgumentOutOfRangeException();
             }
+        }
+
+        public bool Equals(Square other)
+        {
+            return (this.X == other.X && this.Y == other.Y);
         }
     }
 }

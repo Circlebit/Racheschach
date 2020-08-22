@@ -1,6 +1,9 @@
-﻿namespace Racheschach.ChessSet
+﻿using System;
+using System.Collections.Generic;
+
+namespace Racheschach.ChessSet
 {
-    public interface IMove
+    public interface IMove : IEquatable<Move>
     {
         Square From { get; }
         Square To { get; }
@@ -22,6 +25,7 @@
         bool BlackCanCastleQueenside { get; }
 
         int MoveNumber { get; }
-
+        Board Board { get; }
     }
+
 }

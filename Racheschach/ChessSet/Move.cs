@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Racheschach.ChessSet
 {
-    public class Move : IMove
+    public class Move : IMove, IEquatable<Move>
     {
         public Square From { get; }
         public Square To { get; }
@@ -17,17 +17,6 @@ namespace Racheschach.ChessSet
 
         public Square EnPassant => GetEnPassant();
 
-        private Square GetEnPassant()
-        {
-            var foo = Color.PawnRow();
-
-            if (ColorPiece.PieceType == PieceType.Pawn
-                && From.RowName == Color.PawnRow()
-                && To == From.Forwards(Color).Forwards(Color))
-                return From.Forwards(Color);
-            else return null;
-        }
-
         public bool IsHalfMove => !TakesPiece && ColorPiece.PieceType != PieceType.Pawn;
         public int HalfMoves => IsHalfMove ? LastMove.HalfMoves + 1 : 0;
 
@@ -38,7 +27,7 @@ namespace Racheschach.ChessSet
 
         public int MoveNumber { get; }
 
-        private Board Board => From.Board;
+        public Board Board => From.Board;
 
         public Move(Square from, Square to)
         {
@@ -57,5 +46,22 @@ namespace Racheschach.ChessSet
             BlackCanCastleQueenside = true;
         }
 
+        private Square GetEnPassant()
+        {
+            var foo = Color.PawnRow();
+
+            if (ColorPiece.PieceType == PieceType.Pawn
+                && From.RowName == Color.PawnRow()
+                && To == From.Forwards(Color).Forwards(Color))
+                return From.Forwards(Color);
+            else return null;
+        }
+
+        public bool Equals(Move other)
+        {
+            return this.Board.Equals(other.Board)
+                && (this.From.Equals(other.From))
+                && (this.To.Equals(other.To));
+        }
     }
 }

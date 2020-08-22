@@ -52,12 +52,13 @@ namespace Racheschach.ChessSet
 
             SetNeighborSquares();
             Moves = new Stack<IMove>();
-            Moves.Push(new InitialMove());
+            Moves.Push(new InitialMove(this));
             LastMove = Moves.Peek();
         }
 
         public void PlayMove(IMove move)
         {
+            if (!move.Board.Equals(this)) throw new Exception("Move is not for this Board!");
             Moves.Push(move);
             move.To.SetPiece(move.ColorPiece);
             move.From.SetPiece();

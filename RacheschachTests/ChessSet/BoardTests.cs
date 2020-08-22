@@ -296,15 +296,40 @@ namespace Racheschach.ChessSet.Tests
             var b2 = new Board();
             b2.SetupGame();
 
-            Assert.True(b1.Equals(b2));
+            Assert.Equal(b1, b2);
 
             b1.PlayMove(b1.GetNewMove("e2","e4"));
-            Assert.False(b1.Equals(b2));
+            Assert.NotEqual(b1, b2);
 
             b2.PlayMove(b2.GetNewMove("e2", "e4"));
-            Assert.True(b1.Equals(b2));
-
+            Assert.Equal(b1, b2);
         }
 
+        [Fact()]
+        public void SquareEqualsTest()
+        {
+            var b1 = new Board();
+            b1.SetupGame();
+
+            var b2 = new Board();
+            b2.SetupGame();
+
+            Assert.Equal(b1.GetSquareBySquareNotation("e4"), b2.GetSquareBySquareNotation("e4"));
+            Assert.NotEqual(b1.GetSquareBySquareNotation("e4"), b1.GetSquareBySquareNotation("f4"));
+            Assert.Equal(b1.GetSquareBySquareNotation("e2"), b2.GetSquareBySquareNotation("e2"));
+            Assert.NotEqual(b1.GetSquareBySquareNotation("e4"), b1.GetSquareBySquareNotation("e1"));
+
+            b1.PlayMove(b1.GetNewMove("e2", "e4"));
+            Assert.Equal(b1.GetSquareBySquareNotation("e4"), b2.GetSquareBySquareNotation("e4"));
+            Assert.NotEqual(b1.GetSquareBySquareNotation("e4"), b1.GetSquareBySquareNotation("f4"));
+            Assert.Equal(b1.GetSquareBySquareNotation("e2"), b2.GetSquareBySquareNotation("e2"));
+            Assert.NotEqual(b1.GetSquareBySquareNotation("e4"), b1.GetSquareBySquareNotation("e1"));
+
+            b2.PlayMove(b2.GetNewMove("e2", "e4"));
+            Assert.Equal(b1.GetSquareBySquareNotation("e4"), b2.GetSquareBySquareNotation("e4"));
+            Assert.NotEqual(b1.GetSquareBySquareNotation("e4"), b1.GetSquareBySquareNotation("f4"));
+            Assert.Equal(b1.GetSquareBySquareNotation("e2"), b2.GetSquareBySquareNotation("e2"));
+            Assert.NotEqual(b1.GetSquareBySquareNotation("e4"), b1.GetSquareBySquareNotation("e1"));
+        }
     }
 }
