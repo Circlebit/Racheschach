@@ -51,7 +51,8 @@ namespace Racheschach.ChessSet
 
             SetNeighborSquares();
             Moves = new Stack<IMove>();
-            PlayIninitalMove();
+            Moves.Push(new InitialMove());
+            LastMove = Moves.Peek();
         }
 
         public void PlayMove(IMove move)
@@ -59,12 +60,6 @@ namespace Racheschach.ChessSet
             Moves.Push(move);
             move.To.SetPiece(move.ColorPiece);
             move.From.SetPiece();
-            LastMove = Moves.Peek();
-        }
-
-        private void PlayIninitalMove()
-        {
-            Moves.Push(new InitialMove());
             LastMove = Moves.Peek();
         }
 
