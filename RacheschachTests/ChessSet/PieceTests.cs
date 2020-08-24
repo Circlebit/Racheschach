@@ -1,8 +1,5 @@
 ﻿using Xunit;
-using Racheschach.ChessSet;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using Racheschach.Notation;
 
 namespace Racheschach.ChessSet.Tests
