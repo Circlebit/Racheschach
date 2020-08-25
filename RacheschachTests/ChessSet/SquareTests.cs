@@ -272,7 +272,6 @@ namespace Racheschach.ChessSet.Tests
             Assert.Equal(a8.WestSquares, new List<Square>());
         }
 
-
         [Fact()]
         public void NorthEastSquares()
         {
@@ -336,7 +335,62 @@ namespace Racheschach.ChessSet.Tests
             Square h1 = b.GetSquareBySquareNotation("h1");
             Assert.Equal(h1.NorthEastSquares, new List<Square>());
         }
-    }
 
+        [Fact()]
+        public void SouthEastSquares()
+        {
+            Board b = new Board();
+
+            Square a8 = b.GetSquareBySquareNotation("a8");
+            List<Square> assertA8 = new List<Square>() {
+                b.GetSquareBySquareNotation("b7"),
+                b.GetSquareBySquareNotation("c6"),
+                b.GetSquareBySquareNotation("d5"),
+                b.GetSquareBySquareNotation("e4"),
+                b.GetSquareBySquareNotation("f3"),
+                b.GetSquareBySquareNotation("g2"),
+                b.GetSquareBySquareNotation("h1")};
+            Assert.Equal(a8.SouthEastSquares, assertA8);
+
+            Square b8 = b.GetSquareBySquareNotation("b8");
+            List<Square> assertB8 = new List<Square>() {
+                b.GetSquareBySquareNotation("c7"),
+                b.GetSquareBySquareNotation("d6"),
+                b.GetSquareBySquareNotation("e5"),
+                b.GetSquareBySquareNotation("f4"),
+                b.GetSquareBySquareNotation("g3"),
+                b.GetSquareBySquareNotation("h2")};
+            Assert.Equal(b8.SouthEastSquares, assertB8);
+
+            Square a7 = b.GetSquareBySquareNotation("a7");
+            List<Square> assertA7 = new List<Square>() {
+                b.GetSquareBySquareNotation("b6"),
+                b.GetSquareBySquareNotation("c5"),
+                b.GetSquareBySquareNotation("d4"),
+                b.GetSquareBySquareNotation("e3"),
+                b.GetSquareBySquareNotation("f2"),
+                b.GetSquareBySquareNotation("g1")};
+            Assert.Equal(a7.SouthEastSquares, assertA7);
+
+            Square d5 = b.GetSquareBySquareNotation("d5");
+            List<Square> assertD5 = new List<Square>() {
+                b.GetSquareBySquareNotation("e4"),
+                b.GetSquareBySquareNotation("f3"),
+                b.GetSquareBySquareNotation("g2"),
+                b.GetSquareBySquareNotation("h1")};
+            Assert.Equal(d5.SouthEastSquares, assertD5);
+
+            Square a1 = b.GetSquareBySquareNotation("a1");
+            Assert.Equal(a1.SouthEastSquares, new List<Square>());
+            Square g1 = b.GetSquareBySquareNotation("g1");
+            Assert.Equal(g1.SouthEastSquares, new List<Square>());
+            Square h1 = b.GetSquareBySquareNotation("h1");
+            Assert.Equal(h1.SouthEastSquares, new List<Square>());
+            Square h8 = b.GetSquareBySquareNotation("h8");
+            Assert.Equal(h8.SouthEastSquares, new List<Square>());
+            Square h7 = b.GetSquareBySquareNotation("h7");
+            Assert.Equal(h7.SouthEastSquares, new List<Square>());
+        }
+    }
 
 }
