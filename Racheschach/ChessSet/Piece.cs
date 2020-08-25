@@ -83,107 +83,24 @@ namespace Racheschach.ChessSet
         private List<Move> GetPossibleMovesForRook()
         {
             List<Move> moves = new List<Move>();
-            Square nextSquare;
 
-            //TODO: do this in a nice Loop instead four times
-
-            //Moves towards North
-            nextSquare = this.Square;
-            while (nextSquare.North != null)
+            var squaresInAllDirections = new List<List<Square>>() { Square.NorthSquares, 
+                                                                  Square.EastSquares,
+                                                                  Square.SouthSquares,
+                                                                  Square.WestSquares };
+            
+            foreach (List<Square> squaresInDirection in squaresInAllDirections)
             {
-                nextSquare = nextSquare.North;
-                // friendly piece on nextSquare -> can't go there
-                if (nextSquare.HasFriendlyPiece(this.Color)) break;
-                moves.Add(new Move(this.Square, nextSquare));
-                // enemy piece of nextSquare -> can't go beyond
-                if (nextSquare.HasEnemyPiece(this.Color)) break;
-            }
-
-            //Moves towards East
-            nextSquare = this.Square;
-            while (nextSquare.East != null)
-            {
-                nextSquare = nextSquare.East;
-                if (nextSquare.HasFriendlyPiece(this.Color)) break;
-                moves.Add(new Move(this.Square, nextSquare));
-                if (nextSquare.HasEnemyPiece(this.Color)) break;
-            }
-
-            //Moves towards South
-            nextSquare = this.Square;
-            while (nextSquare.South != null)
-            {
-                nextSquare = nextSquare.South;
-                if (nextSquare.HasFriendlyPiece(this.Color)) break;
-                moves.Add(new Move(this.Square, nextSquare));
-                if (nextSquare.HasEnemyPiece(this.Color)) break;
-            }
-
-            //Moves towards West
-            nextSquare = this.Square;
-            while (nextSquare.West != null)
-            {
-                nextSquare = nextSquare.West;
-                if (nextSquare.HasFriendlyPiece(this.Color)) break;
-                moves.Add(new Move(this.Square, nextSquare));
-                if (nextSquare.HasEnemyPiece(this.Color)) break;
+                foreach (var nextSquare in squaresInDirection)
+                {
+                    if (nextSquare.HasFriendlyPiece(this.Color)) break; // friendly piece -> can't go there
+                    moves.Add(new Move(this.Square, nextSquare));
+                    if (nextSquare.HasEnemyPiece(this.Color)) break;    // enemy piece -> can't go beyond
+                }
             }
 
             return moves;
         }
-
-        private List<Move> GetPossibleMovesForRookXXX()
-        {
-            List<Move> moves = new List<Move>();
-            Square nextSquare;
-
-            //TODO: do this in a nice Loop instead four times
-
-            //Moves towards North
-            nextSquare = this.Square;
-            while (nextSquare.North != null)
-            {
-                nextSquare = nextSquare.North;
-                // friendly piece on nextSquare -> can't go there
-                if (nextSquare.HasFriendlyPiece(this.Color)) break;
-                moves.Add(new Move(this.Square, nextSquare));
-                // enemy piece of nextSquare -> can't go beyond
-                if (nextSquare.HasEnemyPiece(this.Color)) break;
-            }
-
-            //Moves towards East
-            nextSquare = this.Square;
-            while (nextSquare.East != null)
-            {
-                nextSquare = nextSquare.East;
-                if (nextSquare.HasFriendlyPiece(this.Color)) break;
-                moves.Add(new Move(this.Square, nextSquare));
-                if (nextSquare.HasEnemyPiece(this.Color)) break;
-            }
-
-            //Moves towards South
-            nextSquare = this.Square;
-            while (nextSquare.South != null)
-            {
-                nextSquare = nextSquare.South;
-                if (nextSquare.HasFriendlyPiece(this.Color)) break;
-                moves.Add(new Move(this.Square, nextSquare));
-                if (nextSquare.HasEnemyPiece(this.Color)) break;
-            }
-
-            //Moves towards West
-            nextSquare = this.Square;
-            while (nextSquare.West != null)
-            {
-                nextSquare = nextSquare.West;
-                if (nextSquare.HasFriendlyPiece(this.Color)) break;
-                moves.Add(new Move(this.Square, nextSquare));
-                if (nextSquare.HasEnemyPiece(this.Color)) break;
-            }
-
-            return moves;
-        }
-
 
     }
 }
