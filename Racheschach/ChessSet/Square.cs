@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -12,15 +13,16 @@ namespace Racheschach.ChessSet
         public Piece Piece { get; set; }
         public Board Board { get; }
 
-        public List<Square> Neighbors { get; set; }
-        public Square North { get; set; }
-        public Square NorthEast { get; set; }
-        public Square East { get; set; }
-        public Square SouthEast { get; set; }
-        public Square South { get; set; }
-        public Square SouthWest { get; set; }
-        public Square West { get; set; }
-        public Square NorthWest { get; set; }
+        // TODO: Remove or reimplement
+        //public List<Square> Neighbors { get; set; }
+        public Square North => NorthSquares.FirstOrDefault();
+        public Square NorthEast => NorthEastSquares.FirstOrDefault();
+        public Square East => EastSquares.FirstOrDefault();
+        public Square SouthEast => SouthEastSquares.FirstOrDefault();
+        public Square South => SouthSquares.FirstOrDefault();
+        public Square SouthWest => SouthWestSquares.FirstOrDefault();
+        public Square West => WestSquares.FirstOrDefault();
+        public Square NorthWest => NorthWestSquares.FirstOrDefault();
 
         public List<Square> NorthSquares => Y < 7 ? new List<Square>(Column).GetRange(Y + 1, 7 - Y) : new List<Square>();
         public List<Square> EastSquares => X < 7 ? new List<Square>(Row).GetRange(X + 1, 7 - X) : new List<Square>();
@@ -132,7 +134,6 @@ namespace Racheschach.ChessSet
             Y = y;
             Piece = new Piece(this);
             Board = board;
-            Neighbors = new List<Square>();
         }
 
         public bool HasFriendlyPiece(Color friendlyColor)
