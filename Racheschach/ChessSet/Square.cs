@@ -82,6 +82,38 @@ namespace Racheschach.ChessSet
                 else return new List<Square>();
             }
         }
+        public List<Square> SouthWestSquares
+        {
+            get
+            {
+                if (Y > 0 && X > 0)
+                {
+                    var southEastSquares = new List<Square>();
+                    for (int x = X - 1, y = Y - 1; x >= 0 && y >= 0; x--, y--)
+                    {
+                        southEastSquares.Add(Board.Squares[x, y]);
+                    }
+                    return southEastSquares;
+                }
+                else return new List<Square>();
+            }
+        }
+        public List<Square> NorthWestSquares
+        {
+            get
+            {
+                if (Y < 7 && X > 0)
+                {
+                    var northWestSquares = new List<Square>();
+                    for (int x = X - 1, y = Y + 1; x >= 0 && y <= 7; x--, y++)
+                    {
+                        northWestSquares.Add(Board.Squares[x, y]);
+                    }
+                    return northWestSquares;
+                }
+                else return new List<Square>();
+            }
+        }
 
         public Square[] Row => Board.GetRowByIndex(Y);
         public Square[] Column => Board.GetColumnByIndex(X);
