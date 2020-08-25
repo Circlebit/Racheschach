@@ -22,6 +22,53 @@ namespace Racheschach.ChessSet
         public Square West { get; set; }
         public Square NorthWest { get; set; }
 
+        public List<Square> NorthSquares => Y < 7 ? new List<Square>(Column).GetRange(Y + 1, 7 - Y) : new List<Square>();
+        public List<Square> EastSquares => X < 7 ? new List<Square>(Row).GetRange(X + 1, 7 - X) : new List<Square>();
+        public List<Square> SouthSquares
+        {
+            get
+            {
+                if(Y > 0)
+                {
+                    var southSquares = new List<Square>(Column).GetRange(0, Y);
+                    southSquares.Reverse();
+                    return southSquares;
+                }
+                else return new List<Square>();
+            }
+        }
+        public List<Square> WestSquares
+        {
+            get
+            {
+                if(X > 0)
+                {
+                    var westSquares = new List<Square>(Row).GetRange(0, X);
+                    westSquares.Reverse();
+                    return westSquares;
+                }
+                else return new List<Square>();
+            }
+        }
+        public List<Square> NorthEastSquares
+        {
+            get
+            {
+                if(Y < 7 && X < 7)
+                {
+                    var northEastSquares = new List<Square>();
+                    for (int x = X + 1, y = Y + 1; x <= 7 && y <= 7; x++, y++)
+                    {
+                        northEastSquares.Add(Board.Squares[x, y]);
+                    }
+                    return northEastSquares;
+                }
+                else return new List<Square>();
+            }
+        }
+
+        public Square[] Row => Board.GetRowByIndex(Y);
+        public Square[] Column => Board.GetColumnByIndex(X);
         public char RowName => BoardHelpers.RowIndexToRowName(Y);
         public char ColumnName => BoardHelpers.ColumnIndexToColumnName(X);
 

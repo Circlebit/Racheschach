@@ -9,7 +9,7 @@ namespace Racheschach.ChessSet.Tests
     public class BoardSquareNeighborTests
     {
         [Fact()]
-        public void BoardSquareNorthNeighborsTest()
+        public void BoardSquareNorthTest()
         {
             Board b = new Board();
 
@@ -42,8 +42,10 @@ namespace Racheschach.ChessSet.Tests
             Assert.Null(b.GetSquareBySquareNotation("h8").North);
         }
 
+
+
         [Fact()]
-        public void BoardSquareNorthEastNeighborsTest()
+        public void BoardSquareNorthEastTest()
         {
             Board b = new Board();
 
@@ -81,7 +83,7 @@ namespace Racheschach.ChessSet.Tests
         }
 
         [Fact()]
-        public void BoardSquareEastNeighborsTest()
+        public void BoardSquareEastTest()
         {
             Board b = new Board();
 
@@ -115,7 +117,7 @@ namespace Racheschach.ChessSet.Tests
         }
 
         [Fact()]
-        public void BoardSquareSouthEastNeighborsTest()
+        public void BoardSquareSouthEastTest()
         {
             Board b = new Board();
 
@@ -154,7 +156,7 @@ namespace Racheschach.ChessSet.Tests
         }
 
         [Fact()]
-        public void BoardSquareSouthNeighborsTest()
+        public void BoardSquareSouthTest()
         {
             Board b = new Board();
 
@@ -188,7 +190,7 @@ namespace Racheschach.ChessSet.Tests
         }
 
         [Fact()]
-        public void BoardSquareSouthWestNeighborsTest()
+        public void BoardSquareSouthWestTest()
         {
             Board b = new Board();
 
@@ -226,7 +228,7 @@ namespace Racheschach.ChessSet.Tests
         }
 
         [Fact()]
-        public void BoardSquareWestNeighborsTest()
+        public void BoardSquareWestTest()
         {
             Board b = new Board();
 
@@ -260,7 +262,7 @@ namespace Racheschach.ChessSet.Tests
         }
 
         [Fact()]
-        public void BoardSquareNorthWestNeighborsTest()
+        public void BoardSquareNorthWestTest()
         {
             Board b = new Board();
 

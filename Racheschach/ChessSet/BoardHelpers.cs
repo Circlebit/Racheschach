@@ -60,14 +60,14 @@ namespace Racheschach.ChessSet
 
         public static char RowIndexToRowName(int rowIndex)
         {
-            if (rowIndex > 0 && rowIndex < 8)
+            if (rowIndex >= 0 && rowIndex < 8)
                 return (char)(rowIndex + 49);
             else throw new ArgumentOutOfRangeException();
         }
 
         public static char ColumnIndexToColumnName(int columnIndex)
         {
-            if (columnIndex > 0 && columnIndex < 8)
+            if (columnIndex >= 0 && columnIndex < 8)
                 return (char)(columnIndex + 97);
             else throw new ArgumentOutOfRangeException();
         }
