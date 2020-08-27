@@ -117,12 +117,12 @@ namespace Racheschach.ChessSet.Tests
             //Assert.Equal(blackBishopRAssertMoves, blackBishopR.GetPossibleMoves());
 
 
-            //var b2 = new Board();
-            //b2.SetupGame();
-            //Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("a1").Piece.GetPossibleMoves());
-            //Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("h1").Piece.GetPossibleMoves());
-            //Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("a8").Piece.GetPossibleMoves());
-            //Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("h8").Piece.GetPossibleMoves());
+            var b2 = new Board();
+            b2.SetupGame();
+            Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("c1").Piece.GetPossibleMoves());
+            Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("f1").Piece.GetPossibleMoves());
+            Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("c8").Piece.GetPossibleMoves());
+            Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("f8").Piece.GetPossibleMoves());
         }
     }
 }
