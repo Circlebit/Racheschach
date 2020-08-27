@@ -73,7 +73,7 @@ namespace Racheschach.ChessSet
                 case PieceType.King: throw new NotImplementedException();
                 case PieceType.Queen: throw new NotImplementedException();
                 case PieceType.Rook: return GetPossibleMovesForRook();
-                case PieceType.Bishop: throw new NotImplementedException();
+                case PieceType.Bishop: return GetPossibleMovesForBishop();
                 case PieceType.Knight: throw new NotImplementedException();
                 case PieceType.Pawn: throw new NotImplementedException();
                 default: throw new Exception();
@@ -84,11 +84,11 @@ namespace Racheschach.ChessSet
         {
             List<Move> moves = new List<Move>();
 
-            var squaresInAllDirections = new List<List<Square>>() { Square.NorthSquares, 
+            var squaresInAllDirections = new List<List<Square>>() { Square.NorthSquares,
                                                                   Square.EastSquares,
                                                                   Square.SouthSquares,
                                                                   Square.WestSquares };
-            
+
             foreach (List<Square> squaresInDirection in squaresInAllDirections)
             {
                 foreach (var nextSquare in squaresInDirection)
@@ -102,5 +102,26 @@ namespace Racheschach.ChessSet
             return moves;
         }
 
+        private List<Move> GetPossibleMovesForBishop()
+        {
+            List<Move> moves = new List<Move>();
+
+            var squaresInAllDirections = new List<List<Square>>() {Square.NorthWestSquares,
+                                                                   Square.NorthEastSquares,
+                                                                   Square.SouthEastSquares,
+                                                                   Square.SouthWestSquares};
+
+            foreach (List<Square> squaresInDirection in squaresInAllDirections)
+            {
+                foreach (var nextSquare in squaresInDirection)
+                {
+                    if (nextSquare.HasFriendlyPiece(this.Color)) break; // friendly piece -> can't go there
+                    moves.Add(new Move(this.Square, nextSquare));
+                    if (nextSquare.HasEnemyPiece(this.Color)) break;    // enemy piece -> can't go beyond
+                }
+            }
+
+            return moves;
+        }
     }
 }
