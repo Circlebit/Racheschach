@@ -12,12 +12,21 @@ namespace ConsoleApp
 
             var b = new Board();
             b.SetupGame();
-
             PrintBoard(b);
 
             var ePawnMoves = b.GetSquareBySquareNotation("e2").Piece.GetPossibleMoves();
             b.PlayMove(ePawnMoves.First());
+            PrintBoard(b);
 
+            b.PlayMove(b.GetSquareBySquareNotation("b8").Piece.GetPossibleMoves().First());
+            PrintBoard(b);
+
+            b.PlayMove(b.GetSquareBySquareNotation("d1").Piece.GetPossibleMoves()[1]);
+            PrintBoard(b);
+
+            var h7 = b.GetSquareBySquareNotation("h7");
+            var hPawnMoves = h7.Piece.GetPossibleMoves();
+            b.PlayMove(hPawnMoves.First());
             PrintBoard(b);
 
         }
