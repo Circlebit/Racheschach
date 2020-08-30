@@ -48,10 +48,10 @@ namespace Racheschach.ChessSet
 
         private Square GetEnPassant()
         {
-            var foo = Color.PawnRow();
+            var foo = Color.PawnRowName();
 
             if (ColorPiece.PieceType == PieceType.Pawn
-                && From.RowName == Color.PawnRow()
+                && From.RowName == Color.PawnRowName()
                 && To == From.Forwards(Color).Forwards(Color))
                 return From.Forwards(Color);
             else return null;
