@@ -188,5 +188,42 @@ namespace Racheschach.ChessSet.Tests
             Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("e1").Piece.GetPossibleMoves());
             Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("e8").Piece.GetPossibleMoves());
         }
+
+        [Fact()]
+        public void GetPossibleMovesForKnightTest()
+        {
+            var f = new FEN("rnbqkbnr/ppppppp1/7p/3N4/8/8/PPPPPPPP/R1BQKBNR b KQkq - 1 2");
+            var b = f.Board;
+
+            Piece whiteKnightL = b.GetSquareBySquareNotation("d5").Piece;
+            var whiteKnightLAssertMoves = new List<Move>() {
+                b.GetNewMove("d5","c7"),
+                b.GetNewMove("d5","e7"),
+                b.GetNewMove("d5","f6"),
+                b.GetNewMove("d5","f4"),
+                b.GetNewMove("d5","e3"),
+                b.GetNewMove("d5","c3"),
+                b.GetNewMove("d5","b4"),
+                b.GetNewMove("d5","b6")};
+            Assert.Equal(whiteKnightLAssertMoves, whiteKnightL.GetPossibleMoves());
+
+            Piece whiteKnightR = b.GetSquareBySquareNotation("g1").Piece;
+            var whiteKnightRAssertMoves = new List<Move>() {
+                b.GetNewMove("g1","f3"),
+                b.GetNewMove("g1","h3")};
+            Assert.Equal(whiteKnightRAssertMoves, whiteKnightR.GetPossibleMoves());
+
+            Piece blackKnightL = b.GetSquareBySquareNotation("b8").Piece;
+            var blackKnightLAssertMoves = new List<Move>() {
+                b.GetNewMove("b8","c6"),
+                b.GetNewMove("b8","a6")};
+            Assert.Equal(blackKnightLAssertMoves, blackKnightL.GetPossibleMoves());
+
+            Piece blackKnightR = b.GetSquareBySquareNotation("g8").Piece;
+            var blackKnightRAssertMoves = new List<Move>() {
+                b.GetNewMove("g8","f6") };
+            Assert.Equal(blackKnightRAssertMoves, blackKnightR.GetPossibleMoves());
+        }
+
     }
 }

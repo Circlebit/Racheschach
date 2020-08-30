@@ -74,7 +74,7 @@ namespace Racheschach.ChessSet
                 case PieceType.Queen: return GetPossibleMovesForQueen();
                 case PieceType.Rook: return GetPossibleMovesForRook();
                 case PieceType.Bishop: return GetPossibleMovesForBishop();
-                case PieceType.Knight: throw new NotImplementedException();
+                case PieceType.Knight: return GetPossibleMovesForKnight();
                 case PieceType.Pawn: throw new NotImplementedException();
                 default: throw new Exception();
             }
@@ -169,5 +169,35 @@ namespace Racheschach.ChessSet
 
             return moves;
         }
+
+        private List<Move> GetPossibleMovesForKnight()
+        {
+            //TODO: Add more Tests 
+            List<Move> moves = new List<Move>();
+
+            var squares = new List<Square>();
+
+            try { squares.Add(Square.North.North.West); } catch { }
+            try { squares.Add(Square.North.North.East); } catch { }
+            try { squares.Add(Square.North.East.East); } catch { }
+            try { squares.Add(Square.South.East.East); } catch { }
+            try { squares.Add(Square.South.South.East); } catch { }
+            try { squares.Add(Square.South.South.West); } catch { }
+            try { squares.Add(Square.South.West.West); } catch { }
+            try { squares.Add(Square.North.West.West); } catch { }
+
+            squares.RemoveAll(x => x == null);
+
+            foreach (var nextSquare in squares)
+            {
+                if (nextSquare.HasFriendlyPiece(this.Color)) continue; // friendly piece -> can't go there
+                moves.Add(new Move(this.Square, nextSquare));
+            }
+
+            return moves;
+        }
+
+
     }
+
 }
