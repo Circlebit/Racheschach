@@ -177,14 +177,14 @@ namespace Racheschach.ChessSet
 
             var squares = new List<Square>();
 
-            try { squares.Add(Square.North.North.West); } catch { }
-            try { squares.Add(Square.North.North.East); } catch { }
-            try { squares.Add(Square.North.East.East); } catch { }
-            try { squares.Add(Square.South.East.East); } catch { }
-            try { squares.Add(Square.South.South.East); } catch { }
-            try { squares.Add(Square.South.South.West); } catch { }
-            try { squares.Add(Square.South.West.West); } catch { }
-            try { squares.Add(Square.North.West.West); } catch { }
+            try { squares.Add(Square.North.North.West); } catch(NullReferenceException) { }
+            try { squares.Add(Square.North.North.East); } catch(NullReferenceException) { }
+            try { squares.Add(Square.North.East.East); } catch(NullReferenceException) { }
+            try { squares.Add(Square.South.East.East); } catch(NullReferenceException) { }
+            try { squares.Add(Square.South.South.East); } catch(NullReferenceException) { }
+            try { squares.Add(Square.South.South.West); } catch(NullReferenceException) { }
+            try { squares.Add(Square.South.West.West); } catch(NullReferenceException) { }
+            try { squares.Add(Square.North.West.West); } catch(NullReferenceException) { }
 
             squares.RemoveAll(x => x == null);
 
@@ -205,19 +205,19 @@ namespace Racheschach.ChessSet
             var squares = new List<Square>();
 
             if (Square.NorthWest != null && Square.NorthWest.HasEnemyPiece(Color))
-                squares.Add(Square.NorthWest);
+                squares.Add(Square.ForwardsLeft(Color));
 
             if (Square.North != null && !Square.North.HasFriendlyPiece(Color))
-                squares.Add(Square.North);
+                squares.Add(Square.Forwards(Color)); //TODO: North doesn't work for black
 
             if (Square.RowName == Color.PawnRowName())
             {
-                squares.Add(Square.North.North);
+                squares.Add(Square.Forwards(Color).Forwards(Color));
                 //TODO: en passant
             }
 
             if (Square.NorthEast != null && Square.NorthEast.HasEnemyPiece(Color))
-                squares.Add(Square.NorthEast);
+                squares.Add(Square.ForwardsRight(Color));
 
             if (Square.North == null) { } //TODO: change piece
 
