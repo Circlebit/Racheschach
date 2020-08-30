@@ -207,8 +207,8 @@ namespace Racheschach.ChessSet
             if (Square.NorthWest != null && Square.NorthWest.HasEnemyPiece(Color))
                 squares.Add(Square.NorthWest);
 
-            if (Square.NorthEast != null && Square.NorthEast.HasEnemyPiece(Color)) 
-                squares.Add(Square.NorthEast);
+            if (Square.North != null && !Square.North.HasFriendlyPiece(Color))
+                squares.Add(Square.North);
 
             if (Square.RowName == Color.PawnRowName())
             {
@@ -216,11 +216,14 @@ namespace Racheschach.ChessSet
                 //TODO: en passant
             }
 
-            if (Square.North != null && !Square.North.HasFriendlyPiece(Color))
-                squares.Add(Square.North);
+            if (Square.NorthEast != null && Square.NorthEast.HasEnemyPiece(Color))
+                squares.Add(Square.NorthEast);
 
             if (Square.North == null) { } //TODO: change piece
 
+            foreach (var square in squares)
+                moves.Add(new Move(this.Square, square));
+            
             return moves;
         }
 

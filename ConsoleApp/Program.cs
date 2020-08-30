@@ -14,6 +14,12 @@ namespace ConsoleApp
             b.SetupGame();
 
             PrintBoard(b);
+
+            var ePawnMoves = b.GetSquareBySquareNotation("e2").Piece.GetPossibleMoves();
+            b.PlayMove(ePawnMoves.First());
+
+            PrintBoard(b);
+
         }
 
         private static void PrintBoard(Board board, bool blackPerspective = false)
@@ -38,7 +44,7 @@ namespace ConsoleApp
                 }
                 Console.Write($" {row[0].RowName} \n");
             }
-            Console.Write(columnNames);
+            Console.WriteLine(columnNames);
 
         }
     }
