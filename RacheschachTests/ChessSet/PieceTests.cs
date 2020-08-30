@@ -116,5 +116,48 @@ namespace Racheschach.ChessSet.Tests
             Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("c8").Piece.GetPossibleMoves());
             Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("f8").Piece.GetPossibleMoves());
         }
+
+        [Fact()]
+        public void GetPossibleMovesForQueenTest()
+        {
+            var f = new FEN("rnb1k1n1/2p3p1/P7/3qpr2/2R3pP/bP5R/1B1P1P2/1N1QKBN1 b q - 2 13");
+            var b = f.Board;
+
+            Piece whiteQueen = b.GetSquareBySquareNotation("d1").Piece;
+            var whiteBishopLAssertMoves = new List<Move>() {
+                b.GetNewMove("d1","c2"),
+                b.GetNewMove("d1","e2"),
+                b.GetNewMove("d1","f3"),
+                b.GetNewMove("d1","g4"),
+                b.GetNewMove("d1","c1")};
+            Assert.Equal(whiteBishopLAssertMoves, whiteQueen.GetPossibleMoves());
+
+            Piece blackQueen = b.GetSquareBySquareNotation("d5").Piece;
+            var blackBishopLAssertMoves = new List<Move>() {
+                b.GetNewMove("d5","c6"),
+                b.GetNewMove("d5","b7"),
+                b.GetNewMove("d5","d6"),
+                b.GetNewMove("d5","d7"),
+                b.GetNewMove("d5","d8"),
+                b.GetNewMove("d5","e6"),
+                b.GetNewMove("d5","f7"),
+                b.GetNewMove("d5","e4"),
+                b.GetNewMove("d5","f3"),
+                b.GetNewMove("d5","g2"),
+                b.GetNewMove("d5","h1"),
+                b.GetNewMove("d5","d4"),
+                b.GetNewMove("d5","d3"),
+                b.GetNewMove("d5","d2"),
+                b.GetNewMove("d5","c4"),
+                b.GetNewMove("d5","c5"),
+                b.GetNewMove("d5","b5"),
+                b.GetNewMove("d5","a5")};
+            Assert.Equal(blackBishopLAssertMoves, blackQueen.GetPossibleMoves());
+
+            var b2 = new Board();
+            b2.SetupGame();
+            Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("d1").Piece.GetPossibleMoves());
+            Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("d8").Piece.GetPossibleMoves());
+        }
     }
 }
