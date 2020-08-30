@@ -199,6 +199,7 @@ namespace Racheschach.ChessSet
 
         private List<Move> GetPossibleMovesForPawn()
         {
+            //TODO: add unit tests
             List<Move> moves = new List<Move>();
 
             var squares = new List<Square>();
