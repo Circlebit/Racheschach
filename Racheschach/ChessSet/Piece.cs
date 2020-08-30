@@ -70,7 +70,7 @@ namespace Racheschach.ChessSet
             switch (PieceType)
             {
                 case PieceType.None: throw new NotImplementedException();
-                case PieceType.King: throw new NotImplementedException();
+                case PieceType.King: return GetPossibleMovesForKing();
                 case PieceType.Queen: return GetPossibleMovesForQueen();
                 case PieceType.Rook: return GetPossibleMovesForRook();
                 case PieceType.Bishop: return GetPossibleMovesForBishop();
@@ -78,6 +78,26 @@ namespace Racheschach.ChessSet
                 case PieceType.Pawn: throw new NotImplementedException();
                 default: throw new Exception();
             }
+        }
+
+        private List<Move> GetPossibleMovesForKing()
+        {
+            //TODO: remove suicidal moves and add tests for that ( needs to be done for all pieces though. where?)
+            List<Move> moves = new List<Move>();
+
+            var squaresInAllDirections = new List<Square>() { Square.NorthWest, Square.North, Square.NorthEast,
+                                                              Square.East,
+                                                              Square.SouthEast, Square.South, Square.SouthWest,
+                                                              Square.West };
+            squaresInAllDirections.RemoveAll(x => x == null);
+
+            foreach (var nextSquare in squaresInAllDirections)
+            {
+                if (nextSquare.HasFriendlyPiece(this.Color)) continue; // friendly piece -> can't go there
+                moves.Add(new Move(this.Square, nextSquare));
+            }
+
+            return moves;
         }
 
         private List<Move> GetPossibleMovesForQueen()

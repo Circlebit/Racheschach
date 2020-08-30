@@ -159,5 +159,34 @@ namespace Racheschach.ChessSet.Tests
             Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("d1").Piece.GetPossibleMoves());
             Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("d8").Piece.GetPossibleMoves());
         }
+
+        [Fact()]
+        public void GetPossibleMovesForKingTest()
+        {
+            var f = new FEN("rnb5/2p1k1p1/P1R4n/3qpr2/6pP/bP5R/1B1P1P2/1N1QKBN1 w - - 5 15");
+            var b = f.Board;
+
+            Piece whiteKing = b.GetSquareBySquareNotation("e1").Piece;
+            var whiteKingAssertMoves = new List<Move>() { b.GetNewMove("e1","e2") };
+            Assert.Equal(whiteKingAssertMoves, whiteKing.GetPossibleMoves());
+
+            Piece blackKing = b.GetSquareBySquareNotation("e7").Piece;
+            var blackKingAssertMoves = new List<Move>() {
+                b.GetNewMove("e7","d8"),
+                b.GetNewMove("e7","e8"),
+                b.GetNewMove("e7","f8"),
+                b.GetNewMove("e7","f7"),
+                b.GetNewMove("e7","f6"),
+                b.GetNewMove("e7","e6"),
+                b.GetNewMove("e7","d6"),
+                b.GetNewMove("e7","d7")};
+            var foo = blackKing.GetPossibleMoves();
+            Assert.Equal(blackKingAssertMoves, blackKing.GetPossibleMoves());
+
+            var b2 = new Board();
+            b2.SetupGame();
+            Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("e1").Piece.GetPossibleMoves());
+            Assert.Equal(new List<Move>(), b2.GetSquareBySquareNotation("e8").Piece.GetPossibleMoves());
+        }
     }
 }
