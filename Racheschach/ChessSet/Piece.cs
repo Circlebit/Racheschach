@@ -208,7 +208,7 @@ namespace Racheschach.ChessSet
                 squares.Add(Square.ForwardsLeft(Color));
 
             if (Square.North != null && !Square.North.HasFriendlyPiece(Color))
-                squares.Add(Square.Forwards(Color)); //TODO: North doesn't work for black
+                squares.Add(Square.Forwards(Color));
 
             if (Square.RowName == Color.PawnRowName())
             {
